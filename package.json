@@ -37,7 +37,7 @@
     "wrangler": "^4.67.0"
   },
   "name": "ambio",
-  "packageManager": "bun@1.3.9",
+  "packageManager": "bun@1.3.11",
   "private": true,
   "scripts": {
     "build": "bun run nuxt build",
