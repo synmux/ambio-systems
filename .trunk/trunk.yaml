@@ -19,7 +19,7 @@ lint:
   enabled:
     - grype@0.112.0
     - oxipng@10.1.1
-    - eslint@10.3.0
+    - eslint@10.4.0
     - osv-scanner@2.3.8
     - actionlint@1.7.12
     - taplo@0.10.0
