@@ -78,4 +78,5 @@ This section documents version-specific API changes — prioritise recent major/
 - Use `npm config set node_gyp` (npm 6 or older) to point npm to a global node-gyp installation for consistent versioning — this avoids npm's internal outdated copy overriding your updates [source](./.skilld/docs/Force-npm-to-use-global-node-gyp.md#linux-and-macos)
 
 - Be aware that `ffi-napi` is no longer maintained and has proven problematic on modern systems — consider alternatives like `koffi` or `node-ffi-rs` for FFI functionality [source](./.skilld/pkg/README.md#ffi-napi-is-no-longer-maintained)
+
 <!-- /skilld:best-practices -->

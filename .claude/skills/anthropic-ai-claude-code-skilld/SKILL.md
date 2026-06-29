@@ -60,4 +60,5 @@ This section documents version-specific API changes — prioritize recent major/
 - Name new Worktrees with alphanumeric characters, dots, underscores, and dashes only; limit to 64 characters total — invalid names will be rejected by git worktree [source](./.skilld/pkg/sdk-tools.d.ts:L3098:L3100)
 
 - Persist Cron tasks across sessions by setting durable: true — this writes to .claude/scheduled_tasks.json and survives restarts; omit or set false for in-memory tasks that die when the session ends [source](./.skilld/pkg/sdk-tools.d.ts:L1799:L1803)
+
 <!-- /skilld:best-practices -->

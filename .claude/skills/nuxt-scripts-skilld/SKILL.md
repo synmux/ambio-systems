@@ -156,4 +156,5 @@ Google Maps OverlayView class extraction and reactive rendering · YouTube Playe
 - Use `useScriptEventPage()` to track accurate page titles on SPA navigation — Nuxt's head is async, so route change titles are often stale if you poll directly [source](./.skilld/docs/content/docs/1.guides/3.page-events.md)
 
 - Check each vendor's SPA support before calling `reload()` — many scripts have their own refresh methods (e.g., `_iub.cs.api.activateSnippets()` for iubenda) which are more efficient than full reload [source](./.skilld/docs/content/docs/3.api/1.use-script.md#reload)
+
 <!-- /skilld:best-practices -->

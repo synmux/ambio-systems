@@ -102,4 +102,5 @@ PERFORMANCE: Reactivity system improvements — v3.5 refactored reactivity with 
 - Never dynamically compile templates from user input or server-rendered untrusted content — Vue templates compile to JavaScript and malicious content can execute arbitrary code; always control template content directly in your code [source](./.skilld/docs/guide/best-practices/security.md#rule-no-1-never-use-non-trusted-templates)
 
 - Use `v-memo` to conditionally skip updates for expensive sub-trees or lists when dependencies haven't changed — this is particularly useful for large `v-for` lists or complex render trees to prevent unnecessary recalculations [source](./.skilld/docs/guide/best-practices/performance.md#v-memo)
+
 <!-- /skilld:best-practices -->

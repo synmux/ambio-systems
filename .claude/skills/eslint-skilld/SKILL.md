@@ -112,4 +112,5 @@ This section documents version-specific API changes — prioritize recent major/
 - Separate JavaScript-specific configuration into its own config object with `files: ["**/*.js", "**/*.cjs", "**/*.mjs"]` rather than relying on defaults — ensures rules don't unexpectedly apply to non-JS files [source](./.skilld/docs/src/use/configure/configuration-files.md:L139:144)
 
 - Use `baseConfig` and `overrideConfig` in the Node.js API when linting text in tests — allows full control over configuration without relying on config file discovery [source](./.skilld/docs/src/integrate/nodejs-api.md:L143:147)
+
 <!-- /skilld:best-practices -->

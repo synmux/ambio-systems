@@ -60,6 +60,7 @@ This section documents version-specific API changes for @nuxt/hints v1.1.3.
 - Include @nuxt/hints in the build transpile array if you encounter "#imports" resolution errors — some build configurations with custom Vite optimizeDeps or rollup settings require the module to be explicitly transpiled [source](./.skilld/issues/issue-151.md:L75:L83)
 
 - Use the hover-to-highlight and click-to-inspect DevTools features during debugging — these interactive diagnostics let you navigate directly to problematic elements and source files without manual searching [source](./.skilld/pkg/README.md:L32:L35)
+
 <!-- /skilld:best-practices -->
 
 Related: nitropack-skilld, prettier-skilld

@@ -46,6 +46,7 @@ This section documents version-specific API changes for @nuxt/icon — prioritiz
 ## Dependencies
 
 - BREAKING: Nuxt 4 required — v2.0.0 upgraded to Nuxt v4 as minimum runtime, incompatible with Nuxt 3 [source](./.skilld/releases/v2.0.0.md:L11)
+
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
@@ -109,4 +110,5 @@ icon: {
 - Nest custom icons within subdirectories using `customCollections` with `dir` — v2.1.0+ automatically scans nested folders, eliminating the need for multiple collection entries [source](./.skilld/releases/v2.1.0.md:L11)
 
 - Set `provider: 'none'` with client bundle for offline applications — this disables all network fetching and relies entirely on pre-bundled icons [source](./.skilld/docs/index.md)
+
 <!-- /skilld:best-practices -->

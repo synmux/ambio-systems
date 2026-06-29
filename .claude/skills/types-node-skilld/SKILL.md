@@ -66,4 +66,5 @@ This section documents version-specific API changes in @types/node v26.0.1 — f
 - Prefer `util.types.*()` type guards for runtime type checking — functions like `isArrayBuffer()`, `isArrayBufferView()`, and `isBigInt64Array()` use TypeScript type predicates that narrow types automatically without additional casts [source](./.skilld/pkg/util/types.d.ts:L20-L80)
 
 - Match `chunkSize` between file reader and writer options when using `fs.promises` — set reader and writer to the same chunkSize (default 131072) for optimal `pipeTo()` performance and reduced memory thrashing [source](./.skilld/pkg/fs/promises.d.ts:L110-L145)
+
 <!-- /skilld:best-practices -->

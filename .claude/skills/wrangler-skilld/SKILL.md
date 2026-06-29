@@ -86,4 +86,5 @@ This section documents version-specific API changes in wrangler v4.x — these a
 - Run `wrangler types` after updating bindings or configuration to regenerate TypeScript types — the generated `worker-configuration.d.ts` file ensures type inference for all env bindings and is kept in sync via the postinstall hook [source](./.skilld/docs/workers/wrangler/commands/general.md#generate-types)
 
 - Profile startup time with `wrangler check startup` using the exact same arguments as your deploy command — if you deploy with `--no-bundle`, profile with `--args="--no-bundle"` to get an accurate representation of startup behaviour in production [source](./.skilld/docs/workers/wrangler/commands/workers.md#wrangler-check-startup)
+
 <!-- /skilld:best-practices -->

@@ -74,4 +74,5 @@ This section documents version-specific API changes — prioritize recent major/
 - Create shareable config packages with `peerDependencies` rather than `dependencies` for Prettier — peer dependencies signal that Prettier is a shared platform dependency and prevent version conflicts when multiple configs are combined in a project [source](./.skilld/docs/sharing-configurations.md#creating-a-shareable-config)
 
 - Combine Prettier with other linters via `lint-staged` pre-commit hooks rather than running Prettier as a linter plugin — lint-staged allows multiple formatters and linters to cooperate without performance penalties, and properly handles partially staged files via `git add --patch` [source](./.skilld/docs/precommit.md#option-1-lint-staged)
+
 <!-- /skilld:best-practices -->

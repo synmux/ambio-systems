@@ -96,4 +96,5 @@ export default withNuxt().prepend({
 - Disable auto-init only if you are managing `eslint.config.mjs` manually or in CI pipelines — set `config.autoInit: false` to prevent automatic generation on server start [source](./.skilld/docs/content/1.packages/0.module.md:L294-309)
 
 - Chain FlatConfigComposer methods (`.prepend()`, `.override()`, `.append()`) to customize ESLint config — avoid rewriting the entire config; targeted mutations are safer and more maintainable [source](./.skilld/docs/content/1.packages/0.module.md#config-customizations)
+
 <!-- /skilld:best-practices -->

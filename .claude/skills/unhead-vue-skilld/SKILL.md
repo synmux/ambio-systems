@@ -116,4 +116,5 @@ This section documents version-specific API changes — prioritize recent major/
 - Use useHeadSafe() when working with user-generated content or third-party input — provides XSS protection via a strict whitelist of allowed tags and attributes [source](./.skilld/docs/head/7.api/composables/1.use-head-safe.md#L6:L22)
 
 - Pause DOM updates during route transitions by hooking dom:beforeRender and calling renderDOMHead(head) after navigation completes — prevents jarring tag updates with Suspense components [source](./.skilld/docs/0.vue/head/guides/1.core-concepts/4.pausing-dom-rendering.md#L30:L55)
+
 <!-- /skilld:best-practices -->
