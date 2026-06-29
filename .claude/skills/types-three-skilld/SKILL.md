@@ -64,4 +64,5 @@ This section documents version-specific API changes for @types/three v0.184.1, f
 - Use NormalBufferAttributes or NormalOrGLBufferAttributes type aliases for geometry attribute maps — BufferGeometry defines these aliases to properly type attribute maps that may contain BufferAttribute, InterleavedBufferAttribute, or GLBufferAttribute instances [source](./.skilld/pkg/src/core/BufferGeometry.d.ts:L13-L17)
 
 - Install @webgpu/types separately if using WebGPU rendering on TypeScript <6 — @types/three 0.184.0+ removed the @webgpu/types dependency to avoid conflicts with TypeScript 6's native WebGPU types; manually install @webgpu/types for older TypeScript versions when using WebGPURe nderer [source](./.skilld/discussions/discussion-74856.md)
+
 <!-- /skilld:best-practices -->

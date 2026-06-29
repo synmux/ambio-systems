@@ -100,4 +100,5 @@ The launcher respects these Node.js and system environment variables:
 - Verify macOS version compatibility (10.15.0 or later) before running on Apple Silicon or Intel systems — launcher checks at startup and exits with clear message if unsupported, preventing cryptic binary failures
 
 - Test launcher functionality on all target platforms (Linux x86_64/arm64, macOS Intel/Apple Silicon, Windows x86_64) when automating binary pinning — platform detection affects which executable is downloaded and cached
+
 <!-- /skilld:best-practices -->

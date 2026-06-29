@@ -1,15 +1,15 @@
 ---
 name: anthropic-ai-claude-code-skilld
-description: 'ALWAYS use when writing code importing "@anthropic-ai/claude-code". Consult for debugging, best practices, or modifying @anthropic-ai/claude-code, anthropic-ai/claude-code, anthropic-ai claude-code, anthropic ai claude code, claude-code-2.1.88, claude code 2.1.88.'
+description: 'Use Claude, Anthropic''s AI assistant, right from your terminal. Claude can understand your codebase, edit files, run terminal commands, and handle entire workflows for you. ALWAYS use when writing code importing "@anthropic-ai/claude-code". Consult for debugging, best practices, or modifying @anthropic-ai/claude-code, anthropic-ai/claude-code, anthropic-ai claude-code, anthropic ai claude code, claude-code-2.1.88, claude code 2.1.88.'
 metadata:
-  version: 2.1.159
-  generated_by: Anthropic · Haiku 4.5
-  generated_at: 2026-05-31
+  version: 2.1.195
+  generated_by: cached
+  generated_at: 2026-06-28
 ---
 
-# Exhen/claude-code-2.1.88 `@anthropic-ai/claude-code@2.1.159`
+# Exhen/claude-code-2.1.88 `@anthropic-ai/claude-code@2.1.195`
 
-**Tags:** stable: 2.1.150, latest: 2.1.159, next: 2.1.159
+**Tags:** stable: 2.1.181, latest: 2.1.195, next: 2.1.195
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md)
 
@@ -23,21 +23,11 @@ Use `skilld search "query" -p @anthropic-ai/claude-code` instead of grepping `.s
 
 This section documents version-specific API changes — prioritize recent major/minor releases.
 
-- DEPRECATED: `shell_id` in `TaskStopInput` — old parameter is deprecated, use `task_id` instead [source](./.skilld/pkg/sdk-tools.d.ts:L527)
+- DEPRECATED: `AgentInput.team_name` — ignored; the session has a single implicit team [source](./.skilld/pkg/sdk-tools.d.ts:L437:439)
 
-- NEW: `AskUserQuestionInput` — structured API for asking users multiple-choice questions with descriptions and previews [source](./.skilld/pkg/sdk-tools.d.ts:L608)
+- DEPRECATED: `TaskStopInput.shell_id` — use `task_id` instead [source](./.skilld/pkg/sdk-tools.d.ts:L635:637)
 
-- NEW: `BashInput` `timeout` parameter — specify command execution timeout in milliseconds (max 600000) [source](./.skilld/pkg/sdk-tools.d.ts:L349)
-
-- NEW: `BashInput` `run_in_background` parameter — execute commands asynchronously without blocking [source](./.skilld/pkg/sdk-tools.d.ts:L369)
-
-- NEW: `FileEditOutput` `structuredPatch` field — structured diff information showing exact line changes [source](./.skilld/pkg/sdk-tools.d.ts:L2539)
-
-- NEW: `FileWriteOutput` `structuredPatch` field — structured diff information for file writes with line positions [source](./.skilld/pkg/sdk-tools.d.ts:L2583)
-
-- NEW: `BashOutput` git operation tracking — structured `gitOperation` field detects and reports git/gh commands (commits, pushes, branches, PRs) [source](./.skilld/pkg/sdk-tools.d.ts:L2464)
-
-**Also changed:** `TaskUpdateInput` metadata · `FileEditOutput` userModified flag · `BashOutput` structured content blocks · `EnterWorktreeInput` path parameter
+**Also changed:** No additional breaking changes, removals, or renames detected in v2.1.x lineage.
 
 <!-- /skilld:api-changes -->
 
@@ -45,29 +35,29 @@ This section documents version-specific API changes — prioritize recent major/
 
 ## Best Practices
 
-- Always define workflow `meta` as a pure object literal with no computed values — the harness parses it statically, and dynamic values will be undefined in metadata. Use `name`, `description`, and `phases` fields only. [source](./.skilld/pkg/sdk-tools.d.ts:L2269)
+- Write Bash command descriptions in active voice with clear intent — use 5-10 words for simple commands (e.g., "List files in current directory"), and add context for complex ones with piping or flags (e.g., "Find and delete all .tmp files recursively"). Avoid vague words like "complex" or "risk"; focus on describing what the command does [source](./.skilld/pkg/sdk-tools.d.ts:L518:L533)
 
-- Pass workflow `args` as actual JSON values, not JSON-encoded strings — a stringified array or object breaks `.filter()` and `.map()` because args receives it as a single string rather than a parsed array. [source](./.skilld/pkg/sdk-tools.d.ts:L2285)
+- Use FileRead's offset and limit parameters for large files instead of reading the entire file at once — this avoids truncation by token caps and allows paginated reading [source](./.skilld/pkg/sdk-tools.d.ts:L307:L320)
 
-- Use `CronCreateInput` with `recurring: false` for one-shot reminders — set a pinned minute/hour/day-of-month to fire exactly once at the target time, then auto-delete. Omit this for recurring schedules. [source](./.skilld/pkg/sdk-tools.d.ts:L2309)
+- When reading PDF files with FileRead, use the pages parameter to limit requests to a maximum of 20 pages at a time — this ensures efficient handling of large documents [source](./.skilld/pkg/sdk-tools.d.ts:L312:L313)
 
-- Avoid scheduling at :00 and :30 minute marks in `CronCreateInput` — all users scheduling at those marks causes thundering herd on the service. Pick :07, :23, :37, etc. to distribute load evenly. [source](./.skilld/pkg/sdk-tools.d.ts:L2299)
+- Pass Workflow args as actual JSON values (objects or arrays), never as JSON-encoded strings — stringified args break destructuring and array methods in the workflow script [source](./.skilld/pkg/sdk-tools.d.ts:L1717:L1720)
 
-- Check for all terminal states in `MonitorInput` filters, not just success markers — a monitor that greps only for the success pattern stays silent on crash or hang. Widen the filter to include error/failure signatures (Traceback, Error, FAILED, Killed). [source](./.skilld/pkg/sdk-tools.d.ts:L2365)
+- Use Workflow's scriptPath parameter when iterating on workflow scripts — edit the returned script file and re-invoke with the same scriptPath to avoid resending large scripts [source](./.skilld/pkg/sdk-tools.d.ts:L1726:L1728)
 
-- Use `AgentInput` `isolation: "worktree"` when spawning multiple agents that mutate files in parallel — prevents conflicts and ensures clean, isolated changes, though it adds ~200-500ms setup cost per agent. [source](./.skilld/pkg/sdk-tools.d.ts:L2339)
+- Define Workflow meta as a pure literal object without computed values — JSON serialization of meta requires this constraint [source](./.skilld/pkg/sdk-tools.d.ts:L1704:L1708)
 
-- Structure `BashInput` descriptions by command complexity — for simple CLI tools (git, npm, ls), use 5-10 words; for piped or obscure-flag commands, provide enough context to clarify the operation. Avoid words like "complex" or "risk". [source](./.skilld/pkg/sdk-tools.d.ts:L2353)
+- Resume Workflow executions with resumeFromRunId to preserve caching — completed agent() calls with unchanged prompts return cached results instantly while new or edited calls re-run [source](./.skilld/pkg/sdk-tools.d.ts:L1730:L1733)
 
-- Prefer `GrepInput` `type` parameter over `glob` for standard file types — using `type: "js"` is more efficient than `glob: "*.js"` because the former uses ripgrep's internal type definitions. [source](./.skilld/pkg/sdk-tools.d.ts:L2507)
+- Keep Agent descriptions to 3-5 words — they are shown in progress UI and should be scannable at a glance [source](./.skilld/pkg/sdk-tools.d.ts:L1651:L1653)
 
-- Use `GrepInput` `head_limit: 0` sparingly for unbounded results — defaults to 250, which is a sensible limit; 0 disables it and wastes context on large result sets. Only use 0 when you genuinely need all matches. [source](./.skilld/pkg/sdk-tools.d.ts:L2511)
+- Ask 1-4 questions per AskUserQuestion call with 2-4 options each — keep header labels to 12 characters maximum and option labels to 1-5 words for clarity in the UI [source](./.skilld/pkg/sdk-tools.d.ts:L2389:L2395)
 
-- Apply `grep --line-buffered` in `MonitorInput` pipes — without it, buffering delays event delivery by minutes. Always use when piping grep in monitor commands that emit events. [source](./.skilld/pkg/sdk-tools.d.ts:L2365)
+- Set Monitor's timeout_ms to match the expected operation duration (default 300000ms / 5 min, max 3600000ms / 60 min) — use persistent: true for session-length watches like PR monitoring or log tails that require TaskStop to terminate [source](./.skilld/pkg/sdk-tools.d.ts:L3056:L3065)
 
-- Stop prior workflow in `WorkflowInput` with `resumeFromRunId` before resuming — call `TaskStop` on the prior run first; resuming without stopping causes state conflicts. [source](./.skilld/pkg/sdk-tools.d.ts:L2295)
+- Use present continuous form for Task activeForm (e.g., "Running tests", "Compiling") — this is shown in the spinner while the task is in_progress [source](./.skilld/pkg/sdk-tools.d.ts:L2293:L2295)
 
-- Set `CronCreateInput` `durable: true` only when explicitly requested across sessions — defaults to `false` (in-memory), which is correct for session-scoped reminders. Durability persists to `.claude/scheduled_tasks.json` and survives restarts. [source](./.skilld/pkg/sdk-tools.d.ts:L2313)
+- Name new Worktrees with alphanumeric characters, dots, underscores, and dashes only; limit to 64 characters total — invalid names will be rejected by git worktree [source](./.skilld/pkg/sdk-tools.d.ts:L3098:L3100)
 
-- Structure `ExitPlanModeInput` `allowedPrompts` with semantic action descriptions — use "run tests", "install dependencies", not specific commands, so the harness can match similar operations without explicit enumeration. [source](./.skilld/pkg/sdk-tools.d.ts:L2399)
+- Persist Cron tasks across sessions by setting durable: true — this writes to .claude/scheduled_tasks.json and survives restarts; omit or set false for in-memory tasks that die when the session ends [source](./.skilld/pkg/sdk-tools.d.ts:L1799:L1803)
 <!-- /skilld:best-practices -->

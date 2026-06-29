@@ -58,4 +58,5 @@ This section documents version-specific API changes in nitro-cloudflare-dev v0.2
 - Use `wrangler.json` or `wrangler.jsonc` (introduced in v0.2.2) for tooling compatibility and comments support — `wrangler.toml` remains supported but JSON formats integrate better with IDEs [source](./.skilld/releases/_INDEX.md:L8)
 
 - Pass config through `nitro.cloudflareDev` (Nitro) or `nitro.cloudflareDev` under Nuxt's `nitro` block — direct modification of `runtimeConfig.wrangler` is handled internally and should not be done manually [source](./.skilld/pkg/README.md:L40:47)
+
 <!-- /skilld:best-practices -->

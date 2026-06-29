@@ -1,10 +1,11 @@
 skills:
   nuxt-icon-skilld:
     packageName: "@nuxt/icon"
-    version: 2.2.2
+    version: 2.2.4
+    packages: "@nuxt/icon@2.2.4"
     repo: nuxt/icon
-    source: "https://github.com/nuxt/icon/tree/v2.2.2/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/nuxt/icon/tree/v2.2.4/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   nuxt-fonts-skilld:
     packageName: "@nuxt/fonts"
@@ -15,10 +16,11 @@ skills:
     generator: skilld
   nuxt-eslint-skilld:
     packageName: "@nuxt/eslint"
-    version: 1.15.2
+    version: 1.16.0
+    packages: "@nuxt/eslint@1.16.0"
     repo: nuxt/eslint
-    source: "ungh://nuxt/eslint/packages/module@v1.15.2"
-    syncedAt: 2026-05-31
+    source: "ungh://nuxt/eslint/packages/module@v1.16.0"
+    syncedAt: 2026-06-28
     generator: skilld
   nuxt-image-skilld:
     packageName: "@nuxt/image"
@@ -29,31 +31,35 @@ skills:
     generator: skilld
   nuxt-scripts-skilld:
     packageName: "@nuxt/scripts"
-    version: 1.1.1
+    version: 1.2.1
+    packages: "@nuxt/scripts@1.2.1"
     repo: nuxt/scripts
-    source: "https://scripts.nuxt.com/llms.txt"
-    syncedAt: 2026-05-31
+    source: "https://github.com/nuxt/scripts/tree/v1.2.1/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   tailwindcss-vite-skilld:
     packageName: "@tailwindcss/vite"
-    version: 4.3.0
+    version: 4.3.1
+    packages: "@tailwindcss/vite@4.3.1"
     repo: tailwindlabs/tailwindcss
-    source: "https://github.com/tailwindlabs/tailwindcss/tree/v4.3.0/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/tailwindlabs/tailwindcss/tree/v4.3.1/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   daisyui-skilld:
     packageName: daisyui
-    version: 5.5.20
+    version: 5.6.3
+    packages: "daisyui@5.6.3"
     repo: saadeghi/daisyui
     source: "https://daisyui.com/llms.txt"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   nuxt-hints-skilld:
     packageName: "@nuxt/hints"
-    version: 1.1.2
+    version: 1.1.3
+    packages: "@nuxt/hints@1.1.3"
     repo: nuxt/hints
     source: "ungh://nuxt/hints"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   nuxt-a11y-skilld:
     packageName: "@nuxt/a11y"
@@ -64,17 +70,19 @@ skills:
     generator: skilld
   nuxt-skilld:
     packageName: nuxt
-    version: 4.4.6
+    version: 4.4.8
+    packages: "nuxt@4.4.8"
     repo: nuxt/nuxt
     source: "https://nuxt.com/llms.txt"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   tailwindcss-skilld:
     packageName: tailwindcss
-    version: 4.3.0
+    version: 4.3.1
+    packages: "tailwindcss@4.3.1"
     repo: tailwindlabs/tailwindcss
     source: "ungh://tailwindlabs/tailwindcss/packages/tailwindcss@main"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   drizzle-orm-skilld:
     packageName: drizzle-orm
@@ -85,10 +93,11 @@ skills:
     generator: skilld
   vue-skilld:
     packageName: vue
-    version: 3.5.35
+    version: 3.5.39
+    packages: "vue@3.5.39"
     repo: vuejs/core
-    source: "https://github.com/vuejs/core/tree/v3.5.35/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/vuejs/core/tree/v3.5.39/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   vue-router-skilld:
     packageName: vue-router
@@ -99,17 +108,19 @@ skills:
     generator: skilld
   unhead-vue-skilld:
     packageName: "@unhead/vue"
-    version: 3.1.1
+    version: 3.1.6
+    packages: "@unhead/vue@3.1.6"
     repo: unjs/unhead
-    source: "https://github.com/unjs/unhead/tree/v3.1.1/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/unjs/unhead/tree/v3.1.6/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   eslint-skilld:
     packageName: eslint
-    version: 10.4.1
+    version: 10.6.0
+    packages: "eslint@10.6.0"
     repo: eslint/eslint
-    source: "https://github.com/eslint/eslint/tree/v10.4.1/docs"
-    syncedAt: 2026-05-31
+    source: "ungh://eslint/eslint@v10.6.0"
+    syncedAt: 2026-06-28
     generator: skilld
   trunkio-launcher-skilld:
     packageName: "@trunkio/launcher"
@@ -126,11 +137,11 @@ skills:
     generator: skilld
   anthropic-ai-claude-code-skilld:
     packageName: "@anthropic-ai/claude-code"
-    version: 2.1.159
-    packages: "@anthropic-ai/claude-code@2.1.159"
+    version: 2.1.195
+    packages: "@anthropic-ai/claude-code@2.1.195"
     repo: Exhen/claude-code-2.1.88
     source: "ungh://Exhen/claude-code-2.1.88"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   drizzle-kit-skilld:
     packageName: drizzle-kit
@@ -141,10 +152,11 @@ skills:
     generator: skilld
   node-gyp-skilld:
     packageName: node-gyp
-    version: 12.3.0
+    version: 13.0.0
+    packages: "node-gyp@13.0.0"
     repo: nodejs/node-gyp
-    source: "ungh://nodejs/node-gyp@v12.3.0"
-    syncedAt: 2026-05-31
+    source: "https://github.com/nodejs/node-gyp/tree/v13.0.0/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   nitro-cloudflare-dev-skilld:
     packageName: nitro-cloudflare-dev
@@ -162,17 +174,19 @@ skills:
     generator: skilld
   types-node-skilld:
     packageName: "@types/node"
-    version: 25.9.1
+    version: 26.0.1
+    packages: "@types/node@26.0.1"
     repo: DefinitelyTyped/DefinitelyTyped
     source: readme
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld
   npm-run-all2-skilld:
     packageName: npm-run-all2
-    version: 9.0.1
+    version: 9.0.2
+    packages: "npm-run-all2@9.0.2"
     repo: bcomnes/npm-run-all2
-    source: "ungh://bcomnes/npm-run-all2@v9.0.1"
-    syncedAt: 2026-05-31
+    source: "ungh://bcomnes/npm-run-all2@v9.0.2"
+    syncedAt: 2026-06-28
     generator: skilld
   skilld-skilld:
     packageName: skilld
@@ -183,22 +197,25 @@ skills:
     generator: skilld
   prettier-skilld:
     packageName: prettier
-    version: 3.8.3
+    version: 3.9.1
+    packages: "prettier@3.9.1"
     repo: prettier/prettier
-    source: "https://github.com/prettier/prettier/tree/v3.8.3/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/prettier/prettier/tree/v3.9.1/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   wrangler-skilld:
     packageName: wrangler
-    version: 4.95.0
+    version: 4.105.0
+    packages: "wrangler@4.105.0"
     repo: cloudflare/workers-sdk
-    source: "https://github.com/cloudflare/workers-sdk/tree/v4.95.0/docs"
-    syncedAt: 2026-05-31
+    source: "https://github.com/cloudflare/workers-sdk/tree/v4.105.0/docs"
+    syncedAt: 2026-06-28
     generator: skilld
   three-skilld:
     packageName: three
-    version: 0.184.0
+    version: 0.185.0
+    packages: "three@0.185.0"
     repo: mrdoob/three.js
     source: "https://github.com/mrdoob/three.js/tree/master/docs"
-    syncedAt: 2026-05-31
+    syncedAt: 2026-06-28
     generator: skilld

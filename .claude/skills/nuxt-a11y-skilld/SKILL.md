@@ -44,6 +44,7 @@ The following features are under consideration for future releases:
 - CLI command for generating reports — proposed `nuxt a11y --output=report.md` for CI/CD integration [source](./.skilld/issues/issue-209.md:L16:20)
 
 - Integration with @nuxt/test-utils — planned testing utilities for accessibility scanning in test suites [source](./.skilld/issues/issue-207.md:L12:18)
+
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
@@ -113,4 +114,5 @@ location /admin {
 ## Testing & CI Integration
 
 - Route violations are tracked separately as you navigate your application. Use this organization to prioritize fixes by page importance—critical violations on high-traffic routes should be addressed first [source](./.skilld/pkg/README.md#L30)
+
 <!-- /skilld:best-practices -->
