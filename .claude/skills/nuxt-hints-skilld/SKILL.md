@@ -1,15 +1,15 @@
 ---
 name: nuxt-hints-skilld
-description: 'ALWAYS use when writing code importing "@nuxt/hints". Consult for debugging, best practices, or modifying @nuxt/hints, nuxt/hints, nuxt hints, hints.'
+description: 'Nuxt module that shows hints for aspects of your application such as Performance, Security, and more!. ALWAYS use when writing code importing "@nuxt/hints". Consult for debugging, best practices, or modifying @nuxt/hints, nuxt/hints, nuxt hints, hints.'
 metadata:
-  version: 1.1.3
-  generated_by: Anthropic · Haiku 4.5
-  generated_at: 2026-06-29
+  version: 1.1.4
+  generated_by: cached
+  generated_at: 2026-07-18
 ---
 
-# nuxt/hints `@nuxt/hints@1.1.3`
+# nuxt/hints `@nuxt/hints@1.1.4`
 
-**Tags:** latest: 1.1.3
+**Tags:** latest: 1.1.4
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Issues](./.skilld/issues/_INDEX.md) • [Discussions](./.skilld/discussions/_INDEX.md) • [Releases](./.skilld/releases/_INDEX.md)
 
@@ -21,45 +21,52 @@ Use `skilld search "query" -p @nuxt/hints` instead of grepping `.skilld/` direct
 
 ## API Changes
 
-This section documents version-specific API changes for @nuxt/hints v1.1.3.
+This section documents version-specific API changes in @nuxt/hints v1.x, focusing on configuration and configuration API updates that affect developers using the module.
 
-- NEW: `features` configuration object — introduced in v1.0.0-alpha.10, allows per-feature configuration in `nuxt.config.ts` under the `hints.features` key with toggles for `hydration`, `lazyLoad`, `webVitals`, `thirdPartyScripts`, and `htmlValidate` [source](./.skilld/releases/v1.0.0-alpha.10.md)
+- NEW: `features` configuration object — v1.0.0-alpha.10 introduced the ability to configure individual hints features (hydration, lazyLoad, webVitals, thirdPartyScripts, htmlValidate) via `hints.features` in nuxt.config.ts [source](./.skilld/releases/v1.0.0-alpha.10.md#enhancements)
 
-- NEW: Feature-level options structure — each feature accepts either `boolean` (enable/disable) or `object` with `{ logs: boolean, devtools: boolean, options: {...} }` for fine-grained control, introduced in v1.0.0 [source](./.skilld/pkg/README.md:L142:L150)
+- BREAKING: Hints data now stored in `NuxtPayload.__hints` — v1.0.0-alpha.9 moved from NuxtApp augmentation to NuxtPayload, so internal access patterns changed from app-level hints to payload-level hints storage [source](./.skilld/releases/v1.0.0-alpha.9.md#refactors)
 
-**Also changed:** Features config made partial in v1.1.1 (allows selective overrides) · Html-validate integration added v1.0.0 · RPC wrapBroadcast enhancement v1.1.2
+- NEW: Partial feature configuration — v1.1.1 made the features config object partial, allowing selective feature overrides instead of requiring all features to be defined [source](./.skilld/releases/v1.1.1.md#fixes)
 
+- NEW: Feature flag options — Each feature now accepts either a boolean or an object with `logs`, `devtools`, and `options` keys for fine-grained control over logging output and devtools visibility per feature [source](./.skilld/pkg/README.md:L142:150)
+
+- NEW: HTML-validate integration — v1.0.0 added built-in HTML validation powered by html-validate, which runs on every server-rendered response and appears in the devtools panel [source](./.skilld/releases/v1.0.0.md#enhancements)
+
+- NEW: `wrapBroadcast` RPC utility — v1.1.2 implemented wrapBroadcast function to enhance RPC error handling in devtools communication [source](./.skilld/releases/v1.1.2.md#enhancements)
+
+**Also changed:** SSE moved to devtools RPC v1.1.0 · Devtools header made sticky v1.1.4 · Preemptive router creation v1.1.4
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
 
 ## Best Practices
 
-- Use partial feature configuration to selectively debug specific areas — configure only the feature you're fixing and disable others to reduce console noise [source](./.skilld/releases/v1.1.1.md)
+- Disable individual features progressively when overwhelmed by logs — use the `features` object with feature-specific toggles instead of disabling the entire module [source](./.skilld/pkg/README.md:L120:L150)
 
-- Configure features as objects with `{ logs, devtools, options }` flags rather than just booleans for granular control over whether warnings appear in console vs DevTools only [source](./.skilld/pkg/README.md:L142:L150)
+- Use the object syntax with `logs: false` for specific features to suppress console output while keeping devtools panel updates — helps debug false positives without noise [source](./.skilld/pkg/README.md:L142:L150)
 
-- Expect hydration detection to produce false positives when components mount — the module relies on Vue's onMounted hook rather than a dedicated hydration mismatch hook, so timing differences can trigger spurious warnings [source](./.skilld/issues/issue-257.md)
+- Convert statically imported components to lazy-loaded using the `Lazy` prefix (e.g., `<LazyHeavyComponent>`) when the module suggests lazy-loading — this reduces client bundle size without refactoring component definitions [source](./.skilld/pkg/README.md:L88:L89)
 
-- Keep the DevTools panel connected during development when using lazy-load detection — if the client disconnects, lazy-load reporting via birpc times out and crashes the dev server (fixed in v1.1.2 but still worth avoiding) [source](./.skilld/releases/v1.1.2.md)
+- Use `defineAsyncComponent()` as an alternative to the `Lazy` prefix for components that the module flags as unused during SSR/hydration — enables explicit control over loading timing and fallback states [source](./.skilld/pkg/README.md:L88:L89)
 
-- Disable htmlValidate or carefully manage SVG structures in your markup — the feature uses Prettier's HTML parser which cannot handle SVG-to-HTML namespace transitions (e.g., SVG with nested `<picture>` elements inside `<foreignObject>`) [source](./.skilld/issues/issue-360.md:L12:L23)
+- On Windows, create a `hints.config.ts` file and configure the `#hints-config` alias explicitly if module resolution fails — avoids build-time aliasing issues specific to Windows file paths [source](./.skilld/issues/issue-290.md:L28:L56)
 
-- Apply the Windows path alias workaround if #hints-config fails to resolve on Windows — use a manual alias in nuxt.config.ts to point to a local hints.config.ts file [source](./.skilld/issues/issue-290.md:L30:L57)
+- Wrap components with `<ClientOnly>` when intentional client-only rendering is needed — the module reports hydration differences for ClientOnly-wrapped content, which is expected behaviour and not a mismatch [source](./.skilld/issues/issue-154.md:L24:L27)
 
-- Use Lazy prefix (e.g., `<LazyHeavyComponent>`) or defineAsyncComponent for component suggestions — lazy-load detection identifies statically imported components but relies on your components using Nuxt's built-in lazy-loading patterns to fix issues [source](./.skilld/pkg/README.md:L87:L89)
+- Set `app.baseURL` in `nuxt.config.ts` before adding the module if your app runs under a non-root path — the devtools panel, telemetry endpoint, and client requests depend on this configuration to resolve correctly [source](./.skilld/issues/issue-361.md:L15:L18)
 
-- Focus on Web Vitals attribution data to pinpoint exact elements causing performance issues — LCP, INP, and CLS metrics come with detailed attribution so you can identify and optimize specific DOM elements rather than guessing [source](./.skilld/pkg/README.md:L29)
+- Add `@nuxt/hints` to the `transpile` build option if module resolution fails at build time — ensures @nuxt/hints imports are processed before Vite's import analysis [source](./.skilld/issues/issue-151.md:L78:L81)
 
-- Add crossorigin="anonymous" to external scripts in your audit recommendations — the module flags missing crossorigin attributes because they improve security and enable error reporting for third-party scripts [source](./.skilld/pkg/README.md:L107:L108)
+- Disable the `htmlValidate` feature if it crashes SSR responses (HTTP 500) on SVG content with nested HTML — mark this feature as `{ htmlValidate: false }` until the issue is resolved upstream [source](./.skilld/issues/issue-360.md:L1:L12)
 
-- Ignore style-only hydration diffs as these are false positives — v1.1.3 filters style serialization differences to reduce noise [source](./.skilld/releases/v1.1.3.md:L11)
+- Prefer `hydration: true` in feature configuration over other hints when starting a new project — hydration mismatches are the highest priority blocker for SSR applications and the most actionable feedback [source](./.skilld/pkg/README.md:L132:L140)
 
-- Disable the hydration feature if your app uses ssr: false — the module will still try to detect mismatches and generate warnings even though hydration never runs [source](./.skilld/issues/issue-197.md)
+- Test the module with HTTPS dev server (`nuxt dev --host`) if accessing from mobile devices on the same network — `crypto.randomUUID` requires a secure context on non-localhost origins [source](./.skilld/issues/issue-221.md:L12:L40)
 
-- Include @nuxt/hints in the build transpile array if you encounter "#imports" resolution errors — some build configurations with custom Vite optimizeDeps or rollup settings require the module to be explicitly transpiled [source](./.skilld/issues/issue-151.md:L75:L83)
+- Review the devtools panel periodically rather than relying solely on console warnings — the devtools UI provides interactive inspection, element highlighting on hover, and editor integration that console messages cannot match [source](./.skilld/pkg/README.md:L37:L69)
 
-- Use the hover-to-highlight and click-to-inspect DevTools features during debugging — these interactive diagnostics let you navigate directly to problematic elements and source files without manual searching [source](./.skilld/pkg/README.md:L32:L35)
+- Filter out false-positive third-party script detections in Firefox by checking the script URL for extension protocols (e.g., `moz-extension://`) before taking action on audit recommendations [source](./.skilld/issues/issue-135.md:L1:L43)
 
 <!-- /skilld:best-practices -->
 

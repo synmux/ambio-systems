@@ -2,14 +2,14 @@
 name: anthropic-ai-claude-code-skilld
 description: 'Use Claude, Anthropic''s AI assistant, right from your terminal. Claude can understand your codebase, edit files, run terminal commands, and handle entire workflows for you. ALWAYS use when writing code importing "@anthropic-ai/claude-code". Consult for debugging, best practices, or modifying @anthropic-ai/claude-code, anthropic-ai/claude-code, anthropic-ai claude-code, anthropic ai claude code, claude-code-2.1.88, claude code 2.1.88.'
 metadata:
-  version: 2.1.195
+  version: 2.1.214
   generated_by: cached
-  generated_at: 2026-06-28
+  generated_at: 2026-07-18
 ---
 
-# Exhen/claude-code-2.1.88 `@anthropic-ai/claude-code@2.1.195`
+# Exhen/claude-code-2.1.88 `@anthropic-ai/claude-code@2.1.214`
 
-**Tags:** stable: 2.1.181, latest: 2.1.195, next: 2.1.195
+**Tags:** stable: 2.1.205, latest: 2.1.214, next: 2.1.214
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md)
 
@@ -21,44 +21,49 @@ Use `skilld search "query" -p @anthropic-ai/claude-code` instead of grepping `.s
 
 ## API Changes
 
-This section documents version-specific API changes — prioritize recent major/minor releases.
+This section documents version-specific API changes in @anthropic-ai/claude-code v2.1.214.
 
-- DEPRECATED: `AgentInput.team_name` — ignored; the session has a single implicit team [source](./.skilld/pkg/sdk-tools.d.ts:L437:439)
+- DEPRECATED: `AgentInput.team_name` — the session has a single implicit team; this parameter is ignored [source](./.skilld/pkg/sdk-tools.d.ts:L509)
 
-- DEPRECATED: `TaskStopInput.shell_id` — use `task_id` instead [source](./.skilld/pkg/sdk-tools.d.ts:L635:637)
+- DEPRECATED: `AgentInput.mode` — subagents now inherit the parent session's permission mode; agent-definition frontmatter may override [source](./.skilld/pkg/sdk-tools.d.ts:L513)
 
-**Also changed:** No additional breaking changes, removals, or renames detected in v2.1.x lineage.
+- DEPRECATED: `ExitPlanModeInput.allowedPrompts` — no longer used; the parameter is ignored [source](./.skilld/pkg/sdk-tools.d.ts:L569)
 
+- DEPRECATED: `TaskStopInput.shell_id` — use `task_id` instead to stop background tasks [source](./.skilld/pkg/sdk-tools.d.ts:L707)
+
+- NEW: `AgentInput.isolation` — new parameter for agent execution isolation; accepts "worktree" (temporary git worktree for isolated repo copy) or "remote" (cloud environment execution) [source](./.skilld/pkg/sdk-tools.d.ts:L517)
+
+**Also changed:** `AgentInput.run_in_background` default behaviour documented · `AgentInput.name` for addressable agent identification · `AgentInput.model` supports "sonnet", "opus", "haiku", "fable" variants
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
 
 ## Best Practices
 
-- Write Bash command descriptions in active voice with clear intent — use 5-10 words for simple commands (e.g., "List files in current directory"), and add context for complex ones with piping or flags (e.g., "Find and delete all .tmp files recursively"). Avoid vague words like "complex" or "risk"; focus on describing what the command does [source](./.skilld/pkg/sdk-tools.d.ts:L518:L533)
+- Limit `AskUserQuestion` to 1–4 questions maximum per call to avoid overwhelming users with too many options at once [source](./.skilld/pkg/sdk-tools.d.ts:L847)
 
-- Use FileRead's offset and limit parameters for large files instead of reading the entire file at once — this avoids truncation by token caps and allows paginated reading [source](./.skilld/pkg/sdk-tools.d.ts:L307:L320)
+- Order findings by severity (most-severe first) when using `ReportFindings`, and cap at 32 findings per report — larger reports are truncated and lose context [source](./.skilld/pkg/sdk-tools.d.ts:L768)
 
-- When reading PDF files with FileRead, use the pages parameter to limit requests to a maximum of 20 pages at a time — this ensures efficient handling of large documents [source](./.skilld/pkg/sdk-tools.d.ts:L312:L313)
+- Use `ProposeSkills` with 1–3 proposals only; exceeding this limit wastes effort on low-confidence recommendations [source](./.skilld/pkg/sdk-tools.d.ts:L2677)
 
-- Pass Workflow args as actual JSON values (objects or arrays), never as JSON-encoded strings — stringified args break destructuring and array methods in the workflow script [source](./.skilld/pkg/sdk-tools.d.ts:L1717:L1720)
+- Keep `PushNotification` messages under 200 characters — mobile operating systems truncate beyond this length [source](./.skilld/pkg/sdk-tools.d.ts:L2870)
 
-- Use Workflow's scriptPath parameter when iterating on workflow scripts — edit the returned script file and re-invoke with the same scriptPath to avoid resending large scripts [source](./.skilld/pkg/sdk-tools.d.ts:L1726:L1728)
+- Set `Grep` `head_limit` explicitly to avoid the default 250-line cap causing silent truncation; pass 0 only when you need unlimited results and are certain context can absorb them [source](./.skilld/pkg/sdk-tools.d.ts:L707)
 
-- Define Workflow meta as a pure literal object without computed values — JSON serialization of meta requires this constraint [source](./.skilld/pkg/sdk-tools.d.ts:L1704:L1708)
+- Clamp `ScheduleWakeup` delays to [60, 3600] seconds — the runtime enforces this range, so delays outside it will be adjusted [source](./.skilld/pkg/sdk-tools.d.ts:L3007)
 
-- Resume Workflow executions with resumeFromRunId to preserve caching — completed agent() calls with unchanged prompts return cached results instantly while new or edited calls re-run [source](./.skilld/pkg/sdk-tools.d.ts:L1730:L1733)
+- Use `Monitor` with `persistent: true` for session-length watches (PR monitoring, log tails); set `timeout_ms` explicitly for bounded windows, capped at 3.6 million ms (1 hour) [source](./.skilld/pkg/sdk-tools.d.ts:L3084)
 
-- Keep Agent descriptions to 3-5 words — they are shown in progress UI and should be scannable at a glance [source](./.skilld/pkg/sdk-tools.d.ts:L1651:L1653)
+- Expect `Glob` results to be truncated at 100 files; use patterns to narrow scope rather than relying on high file counts [source](./.skilld/pkg/sdk-tools.d.ts:L693)
 
-- Ask 1-4 questions per AskUserQuestion call with 2-4 options each — keep header labels to 12 characters maximum and option labels to 1-5 words for clarity in the UI [source](./.skilld/pkg/sdk-tools.d.ts:L2389:L2395)
+- Omit the `path` parameter entirely in `Glob` to use the current working directory; never pass `undefined` or `null` explicitly [source](./.skilld/pkg/sdk-tools.d.ts:L683)
 
-- Set Monitor's timeout_ms to match the expected operation duration (default 300000ms / 5 min, max 3600000ms / 60 min) — use persistent: true for session-length watches like PR monitoring or log tails that require TaskStop to terminate [source](./.skilld/pkg/sdk-tools.d.ts:L3056:L3065)
+- Use `FileRead` with explicit `limit` for large files — reads exceeding the token cap are auto-paginated and marked with `truncatedByTokenCap: true` [source](./.skilld/pkg/sdk-tools.d.ts:L627)
 
-- Use present continuous form for Task activeForm (e.g., "Running tests", "Compiling") — this is shown in the spinner while the task is in_progress [source](./.skilld/pkg/sdk-tools.d.ts:L2293:L2295)
+- Confirm `ExitWorktree` with `discard_changes: true` only when you have verified there are no uncommitted files or unmerged commits; the tool lists them and refuses without this flag [source](./.skilld/pkg/sdk-tools.d.ts:L2887)
 
-- Name new Worktrees with alphanumeric characters, dots, underscores, and dashes only; limit to 64 characters total — invalid names will be rejected by git worktree [source](./.skilld/pkg/sdk-tools.d.ts:L3098:L3100)
+- Name new worktrees carefully — each "/" segment is capped at 64 characters and limited to alphanumerics, dots, dashes, and underscores; a random name is generated if omitted [source](./.skilld/pkg/sdk-tools.d.ts:L2873)
 
-- Persist Cron tasks across sessions by setting durable: true — this writes to .claude/scheduled_tasks.json and survives restarts; omit or set false for in-memory tasks that die when the session ends [source](./.skilld/pkg/sdk-tools.d.ts:L1799:L1803)
+- Provide `Artifact` with a short, stable `favicon` (1–2 emoji) that remains constant across redeploys; use a distinctive `file_path` basename as a fallback title when HTML lacks `<title>` [source](./.skilld/pkg/sdk-tools.d.ts:L2828)
 
 <!-- /skilld:best-practices -->

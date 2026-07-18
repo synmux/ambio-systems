@@ -2,14 +2,14 @@
 name: tailwindcss-vite-skilld
 description: 'A utility-first CSS framework for rapidly building custom user interfaces. ALWAYS use when writing code importing "@tailwindcss/vite". Consult for debugging, best practices, or modifying @tailwindcss/vite, tailwindcss/vite, tailwindcss vite, tailwindcss.'
 metadata:
-  version: 4.3.1
+  version: 4.3.3
   generated_by: cached
-  generated_at: 2026-06-28
+  generated_at: 2026-07-18
 ---
 
-# tailwindlabs/tailwindcss `@tailwindcss/vite@4.3.1`
+# tailwindlabs/tailwindcss `@tailwindcss/vite@4.3.3`
 
-**Tags:** internal: 0.0.0-internal.b2586d4e, next: 4.0.0, latest: 4.3.1
+**Tags:** internal: 0.0.0-internal.b2586d4e, next: 4.0.0, insiders: 0.0.0-insiders.094bf62
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md) • [Issues](./.skilld/issues/_INDEX.md) • [Discussions](./.skilld/discussions/_INDEX.md) • [Releases](./.skilld/releases/_INDEX.md)
 
@@ -21,89 +21,92 @@ Use `skilld search "query" -p @tailwindcss/vite` instead of grepping `.skilld/` 
 
 ## API Changes
 
-This section documents version-specific API changes — prioritise recent major/minor releases.
+This section documents version-specific API changes for @tailwindcss/vite, focusing on recent major/minor releases and breaking changes.
 
-## Module Resolution Changes
+## Breaking & Silent Changes
 
-- BREAKING: `@plugin` now resolves package JavaScript entries instead of browser CSS entries when using `@tailwindcss/vite` — previously resolved to browser entry points, causing import errors in Vite environments [source](./.skilld/releases/v4.3.0.md:L63)
+- BREAKING: Spacing utility output format changed in v4.3.1 — `m-0` and `left-0` now generate `0` instead of `calc(var(--spacing) * 0)`, and `m-1` and `left-1` now generate `var(--spacing)` instead of `calc(var(--spacing) * 1)`. This affects how spacing utilities interact with `calc()` expressions [source](./.skilld/releases/v4.3.1.md:L81:L84)
 
-- BREAKING: Relative `@import` and `@plugin` paths now resolve correctly when using `@tailwindcss/vite` — relative imports were previously resolved from the wrong directory, breaking file references [source](./.skilld/releases/v4.3.0.md:L64)
+- DEPRECATED: `start-*` and `end-*` utilities removed in v4.2.0 — use `inset-s-*` and `inset-e-*` utilities instead for logical properties. The old utilities will be canonicalized automatically during upgrades [source](./.skilld/releases/v4.2.0.md:L42)
 
-## New Utility Families (v4.3.0)
+## New Utilities Added
 
-- NEW: `@container-size` utility — CSS `container-size` shorthand utility for defining container query sizing [source](./.skilld/releases/v4.3.0.md:L52)
+- NEW: `@container-size` utility added in v4.3.0 for container query sizing [source](./.skilld/releases/v4.3.0.md:L11)
 
-- NEW: Scrollbar utilities — `scrollbar-{auto,thin,none}` for `scrollbar-width`, `scrollbar-thumb-*` and `scrollbar-track-*` for `scrollbar-color` styling, plus `scrollbar-gutter-*` utilities [source](./.skilld/releases/v4.3.0.md:L53-L54)
+- NEW: `scrollbar-{auto,thin,none}` utilities for `scrollbar-width`, plus `scrollbar-thumb-*` and `scrollbar-track-*` color utilities for `scrollbar-color` — added in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L12:L13)
 
-- NEW: `zoom-*` utilities — CSS `zoom` property utilities for scaling elements [source](./.skilld/releases/v4.3.0.md:L55)
+- NEW: `scrollbar-gutter-*` utilities for `scrollbar-gutter` property added in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L13)
 
-- NEW: `tab-*` utilities — CSS `tab-size` property utilities for controlling tab character width [source](./.skilld/releases/v4.3.0.md:L56)
+- NEW: `zoom-*` utilities for CSS `zoom` property added in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L14)
 
-## Variant Enhancements (v4.3.0)
+- NEW: `tab-*` utilities for CSS `tab-size` property added in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L15)
 
-- NEW: `@variant` supports stacked variants — can now define compound stacked variants like `@variant hover:focus { … }` for combining pseudo-classes [source](./.skilld/releases/v4.3.0.md:L57)
+- NEW: `font-features-*` utility for `font-feature-settings` added in v4.2.0 [source](./.skilld/releases/v4.2.0.md:L22)
 
-- NEW: `@variant` supports compound variants — can define multiple variants in one block with comma syntax like `@variant hover, focus { … }` [source](./.skilld/releases/v4.3.0.md:L58)
+- NEW: Inline size utilities `inline-*`, `min-inline-*`, `max-inline-*` for `inline-size`, `min-inline-size`, and `max-inline-size` added in v4.2.0 [source](./.skilld/releases/v4.2.0.md:L18)
 
-## Functional Utility Definitions (v4.3.0)
+- NEW: Block size utilities `block-*`, `min-block-*`, `max-block-*` for `block-size`, `min-block-size`, and `max-block-size` added in v4.2.0 [source](./.skilld/releases/v4.2.0.md:L19)
 
-- NEW: `--default(…)` support in `--value(…)` and `--modifier(…)` — functional `@utility` definitions can now specify default values using `--default()` syntax [source](./.skilld/releases/v4.3.0.md:L59)
+## New Features & Capabilities
 
-- NEW: `PluginWithConfig` type exported from `tailwindcss/plugin` — fixes TypeScript errors when inferring plugin config types in type-safe plugin definitions [source](./.skilld/releases/v4.3.0.md:L73)
+- NEW: `@variant` directive now supports stacked variants (e.g. `@variant hover:focus { … }`) and compound variants (e.g. `@variant hover, focus { … }`) — added in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L16:L17)
 
-## Logical Property Utilities (v4.2.0)
+- NEW: Functional `@utility` definitions now support `--default(…)` in `--value(…)` and `--modifier(…)` — added in v4.3.0 for more flexible utility theming [source](./.skilld/releases/v4.3.0.md:L18)
 
-- NEW: Logical padding utilities — `pbs-*` (padding-block-start) and `pbe-*` (padding-block-end) for logical directional padding [source](./.skilld/releases/v4.2.0.md:L13)
+- NEW: `@apply` directive now supports CSS mixins — fixed in v4.3.1 [source](./.skilld/releases/v4.3.1.md:L17)
 
-- NEW: Logical margin utilities — `mbs-*` (margin-block-start) and `mbe-*` (margin-block-end), plus scroll variants `scroll-pbs-*`, `scroll-pbe-*`, `scroll-mbs-*`, `scroll-mbe-*` [source](./.skilld/releases/v4.2.0.md:L14-L16)
+- NEW: `PluginWithConfig` type now exported from `tailwindcss/plugin` — was missing and causing type inference errors in v4.3.0 [source](./.skilld/releases/v4.3.0.md:L32)
 
-- NEW: Logical border utilities — `border-bs-*` (border-block-start) and `border-be-*` (border-block-end) for block-axis borders [source](./.skilld/releases/v4.2.0.md:L17)
+## CLI Changes
 
-- NEW: Logical size utilities — `inline-*`, `min-inline-*`, `max-inline-*` for `inline-size` property, and `block-*`, `min-block-*`, `max-block-*` for `block-size` [source](./.skilld/releases/v4.2.0.md:L18-L19)
+- NEW: `--silent` option added to `@tailwindcss/cli` in v4.3.1 to suppress build output [source](./.skilld/releases/v4.3.1.md:L11)
 
-- NEW: Logical inset utilities — `inset-s-*` (inset-inline-start), `inset-e-*` (inset-inline-end), `inset-bs-*` (inset-block-start), `inset-be-*` (inset-block-end) [source](./.skilld/releases/v4.2.0.md:L20)
-
-## Other New Utilities
-
-- NEW: `font-features-*` utility — `font-feature-settings` property utility for controlling OpenType features [source](./.skilld/releases/v4.2.0.md:L21)
-
-## Deprecations
-
-- DEPRECATED: `start-*` and `end-*` utilities — use `inset-s-*` and `inset-e-*` logical property utilities instead (v4.2.0 and later) [source](./.skilld/releases/v4.2.0.md:L42)
-
-**Also changed:** Spacing utility generation optimised for smaller CSS (v4.3.1, #20196)
-
+**Also changed:** Logical sizing utilities `pbs-*`, `pbe-*`, `mbs-*`, `mbe-*`, `scroll-pbs-*`, `scroll-pbe-*`, `scroll-mbs-*`, `scroll-mbs-*`, `border-bs-*`, `border-be-*` (v4.2.0) · `@variant` support inside `addBase()` (v4.3.1) · New color palettes: mauve, olive, mist, taupe (v4.2.0) · Module hook compatibility for Node 26+ (v4.3.1) · Support bare spacing values in `auto-rows-*` and `auto-cols-*` (v4.3.2)
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
 
-## Best Practices
+## Best Practices for @tailwindcss/vite
 
-- Initialize a git repository in your project root — Tailwind uses `.gitignore` rules internally for automatic source detection, and absence of a git boundary can cause files to be ignored [source](./.skilld/discussions/discussion-20135.md:L35)
+## Configuration & Build Optimization
 
-- Use only static class names; never concatenate or interpolate strings to build utility classes — dynamic class names are not detected during scanning [source](./.skilld/discussions/discussion-20135.md:L38)
+- Control Lightning CSS optimization explicitly via the `optimize` plugin option to disable optimization in development or prevent minification when needed for debugging. Set `optimize: false` to disable entirely, or `optimize: { minify: false }` to optimize structure but skip minification [source](./.skilld/pkg-vite/README.md#enabling-or-disabling-lightning-css)
 
-- Control Lightning CSS optimisation explicitly via the `optimize` option: set to `false` for development, or `{ minify: false }` to keep optimisation enabled but skip minification [source](./.skilld/pkg/README.md:L42:76)
+- Use explicit JavaScript entry points when importing packages via `@plugin` in Vite projects—configure module resolution to prefer `.js` exports over `.css` to avoid build errors when resolving plugin dependencies [source](./.skilld/releases/v4.3.0.md#fixed)
 
-- Ensure CSS files containing `@variant` are included in your `@source` declarations — they are processed by `@tailwindcss/vite` and require explicit file inclusion [source](./.skilld/releases/CHANGELOG.md:L65)
+- Prevent unnecessary full-page reloads during development by ensuring scanned CSS files are loaded as modules before triggering HMR; files processed by Vite but not yet loaded as modules will not reload the page [source](./.skilld/releases/v4.3.3.md#fixed)
 
-- Use correct `@import` and `@plugin` path resolution with Vite — relative paths resolve from the directory where the `@import` or `@plugin` statement appears, and Vite aliases (e.g. `@/path`) are resolved when configured in `vite.config.ts` [source](./.skilld/releases/CHANGELOG.md:L64,L82)
+## CSS Features & Utilities
 
-- Declare `@source` directories that must be scanned even if they're ignored by git — prefix with `@source "path"` without negation to ensure those files are included [source](./.skilld/releases/CHANGELOG.md:L38)
+- Combine `@variant` with stacked (e.g. `@variant hover:focus { … }`) or compound (e.g. `@variant hover, focus { … }`) syntax to define complex pseudo-class combinations without manual selector repetition [source](./.skilld/releases/v4.3.0.md#added)
 
-- Use glob patterns in `@source` ending with `**/*` thoughtfully — dynamic path segments are preserved to avoid unnecessary file system walks that slow incremental builds [source](./.skilld/releases/CHANGELOG.md:L34)
+- Apply CSS mixins directly using `@apply`, not just Tailwind utilities—v4.3.1+ supports composition of custom CSS mixins alongside standard utilities for flexible component design [source](./.skilld/releases/v4.3.1.md#fixed)
 
-- Resolve TypeScript path aliases like `@/` in CSS `@import` statements — configure `tsconfig.json` paths and they will be resolved automatically by the Vite plugin [source](./.skilld/releases/CHANGELOG.md:L121)
+## Custom Utilities & Theme Configuration
 
-- Track external file changes with `@source` — modifications to files listed in `@source` declarations trigger a full page reload in development, not just CSS re-compilation [source](./.skilld/releases/CHANGELOG.md:L156)
+- Use `--value()` and `--modifier()` only in functional `@utility` definitions (with the `-*` suffix); static utilities without `-*` do not support these functions—use theme namespace lookups like `--value(--color-*)` or `--spacing(…)` instead [source](./.skilld/discussions/discussion-20218.md#accepted-answer)
 
-- Expect sourcemap generation in development — v4.3.1 fixed incorrect sourcemap warnings, so HMR and debugging are now reliable [source](./.skilld/releases/v4.3.1.md:L20)
+- Create custom color utilities with opacity support by defining colors in custom theme namespaces and combining `--alpha()` with modifiers—map a color name like `current` to `currentColor` in the theme, then apply opacity via percentage or custom modifiers [source](./.skilld/discussions/discussion-20244.md#accepted-answer)
 
-- Import JavaScript entries for packages in `@plugin` directives — when resolving package names, `@tailwindcss/vite` uses JavaScript entry points, not CSS entries, for correct plugin loading [source](./.skilld/releases/CHANGELOG.md:L63)
+## File Scanning & Source Detection
 
-- Scan raw file contents in templates before transforms — the Vite plugin scans unprocessed files to detect utilities, preventing false negatives from framework transforms [source](./.skilld/releases/CHANGELOG.md:L630)
+- Order `@source` directives carefully—place rules targeting nested files before rules targeting parent folders to ensure all files are correctly included in the scan [source](./.skilld/releases/v4.3.3.md#fixed)
 
-- Accept that Astro production builds may re-include classes from client-only components — the Vite plugin doesn't rely on the module graph for client-only component detection to ensure completeness [source](./.skilld/releases/CHANGELOG.md:L629)
+- Initialize a git repository in your project root (`git init`) so Tailwind respects `.gitignore` boundaries during automatic source detection; without a repo boundary, parent-level ignores may prevent file scanning [source](./.skilld/discussions/discussion-20135.md#accepted-answer)
+
+## Class Names & Naming Conventions
+
+- In v4, prefix syntax places variants before the prefix in class names—use `hover:prefix:utility` not `prefix:hover:utility` when applying prefix isolation to ensure variant modifiers are recognized and generated [source](./.skilld/discussions/discussion-20285.md#top-comments)
+
+- Adjacent selectors without whitespace like `[data-foo]div` parse as two separate selectors, not one compound selector—this enables finer control over CSS specificity and selector matching in generated rules [source](./.skilld/releases/v4.3.3.md#fixed)
+
+## Arbitrary Values & Canonicalization
+
+- Canonical class suggestions are intentional for arbitrary values that don't map cleanly to Tailwind's theme scales or when exact pixel values match design specifications—use `w-[123px]` when a design requires that exact value rather than forcing it into the spacing scale [source](./.skilld/discussions/discussion-20142.md#accepted-answer)
+
+## Watch Mode & CLI
+
+- Use `@tailwindcss/cli --watch --poll[=ms]` when filesystem events are unreliable or unavailable (e.g. in Docker, network volumes, or Deno environments)—this mode works without requiring `@parcel/watcher` and automatically falls back when the dependency is unavailable [source](./.skilld/releases/v4.3.3.md#fixed)
 
 <!-- /skilld:best-practices -->
 

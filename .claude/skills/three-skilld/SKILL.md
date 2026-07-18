@@ -1,15 +1,15 @@
 ---
 name: three-skilld
-description: 'ALWAYS use when writing code importing "three". Consult for debugging, best practices, or modifying three, three.js.'
+description: 'JavaScript 3D library. ALWAYS use when writing code importing "three". Consult for debugging, best practices, or modifying three, three.js.'
 metadata:
-  version: 0.185.0
-  generated_by: Anthropic · Haiku 4.5
-  generated_at: 2026-06-29
+  version: 0.185.1
+  generated_by: cached
+  generated_at: 2026-07-18
 ---
 
-# mrdoob/three.js `three@0.185.0`
+# mrdoob/three.js `three@0.185.1`
 
-**Tags:** latest: 0.185.0
+**Tags:** latest: 0.185.1
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md) • [Issues](./.skilld/issues/_INDEX.md)
 
@@ -17,36 +17,79 @@ metadata:
 
 Use `skilld search "query" -p three` instead of grepping `.skilld/` directories. Run `skilld search --guide -p three` for full syntax, filters, and operators.
 
+<!-- skilld:api-changes -->
+
+## API Changes
+
+This section documents version-specific API changes for three v0.185.1 — prioritising recent major/minor releases and changes that affect current users.
+
+- BREAKING: `PostProcessing` class — renamed to `RenderPipeline` since r183, PostProcessing is a backward-compatibility wrapper only [source](./.skilld/docs/pages/PostProcessing.html.md:L15)
+
+- DEPRECATED: `LottieLoader` — will be removed with r186, use lottie-web instead and create animated textures manually [source](./.skilld/docs/pages/LottieLoader.html.md:L42)
+
+- DEPRECATED: `TSL.colorToDirection()` — since r185, use `TSL.unpackRGBToNormal()` instead [source](./.skilld/docs/pages/TSL.html.md)
+
+- DEPRECATED: `TSL.directionToColor()` — since r185, use `TSL.packNormalToRGB()` instead [source](./.skilld/docs/pages/TSL.html.md)
+
+- DEPRECATED: `TSL.directionToFaceDirection()` — since r185, use `TSL.negateOnBackSide()` instead [source](./.skilld/docs/pages/TSL.html.md)
+
+- DEPRECATED: `Line2NodeMaterial.lineColorNode` — since r185, use `NodeMaterial.colorNode` instead [source](./.skilld/docs/pages/Line2NodeMaterial.html.md:L77)
+
+- DEPRECATED: `PassNode.getResolution()` — since r181, use `PassNode.getResolutionScale()` instead [source](./.skilld/docs/pages/PassNode.html.md)
+
+- DEPRECATED: `PassNode.setResolution()` — since r181, use `PassNode.setResolutionScale()` instead [source](./.skilld/docs/pages/PassNode.html.md)
+
+- DEPRECATED: `Renderer.getColorBufferType()` — since r182, use `Renderer.getOutputBufferType()` instead [source](./.skilld/docs/pages/Renderer.html.md)
+
+- DEPRECATED: `LWOLoader` — since r185, LWO format loader is deprecated [source](./.skilld/docs/pages/LWOLoader.html.md:L41)
+
+- DEPRECATED: `VTKLoader` — since r184, VTK format loader is deprecated [source](./.skilld/docs/pages/VTKLoader.html.md:L37)
+
+- DEPRECATED: `TSL.PI2` constant — use `TSL.TWO_PI` instead [source](./.skilld/docs/pages/TSL.html.md:L23)
+
+- DEPRECATED: `Clock` constructor `autoStart` parameter — since r183 [source](./.skilld/docs/pages/Clock.html.md:L17)
+
+- DEPRECATED: `SkyMesh.isSky` property — use `SkyMesh.isSkyMesh` instead [source](./.skilld/docs/pages/SkyMesh.html.md:L72)
+
+- DEPRECATED: `SVGLoader.createShapes()` — since r185 [source](./.skilld/docs/pages/SVGLoader.html.md)
+
+- DEPRECATED: `DRACOExporter.parse()` — use `DRACOExporter.parseAsync()` instead [source](./.skilld/docs/pages/DRACOExporter.html.md)
+
+- DEPRECATED: `TSL.premultiplyAlphaBlur()` — since r180, use `TSL.gaussianBlur()` with `premultipliedAlpha: true` option instead [source](./.skilld/docs/pages/TSL.html.md)
+
+**Also changed:** `TSL.clearcoatNormalView` deprecated r178 · `TSL.normalView` deprecated r178 · `TSL.normalWorld` deprecated r178 · `viewportResolution` constant deprecated r169 (use `screenSize` instead) · `RenderPipeline.renderAsync()` deprecated
+<!-- /skilld:api-changes -->
+
 <!-- skilld:best-practices -->
 
 ## Best Practices
 
-- Use `InstancedMesh` for rendering many objects with identical geometry and material but different transformations — reduces draw calls dramatically for performance-critical scenes [source](./.skilld/docs/pages/InstancedMesh.html.md:L1-10)
+- Prefer TSL over manual shader manipulation for cleaner, more maintainable code — TSL is a node-based shader system that eliminates string manipulation and enables composition, automatic optimizations, and cross-platform compilation to WGSL/GLSL [source](./.skilld/docs/TSL.md#why-tsl)
 
-- Set `needsUpdate = true` on `instanceMatrix` after calling `setMatrixAt()` and on `instanceColor` after `setColorAt()` to notify the engine of transformation changes [source](./.skilld/docs/pages/InstancedMesh.html.md:L51-63)
+- Always pair environment maps with MeshStandardMaterial and use PMREMGenerator to pre-process them for physically accurate rendering — environment maps provide lighting context that MeshStandardMaterial requires for proper shading [source](./.skilld/docs/pages/MeshStandardMaterial.html.md#envmap)
 
-- Always call `dispose()` on `InstancedMesh`, `BatchedMesh`, and `EffectComposer` when no longer used to free GPU resources and prevent memory leaks [source](./.skilld/docs/pages/InstancedMesh.html.md:L77-79)
+- Use TextureLoader.loadAsync() instead of the callback-based .load() method for cleaner async/await patterns in modern JavaScript [source](./.skilld/docs/pages/TextureLoader.html.md#code-example)
 
-- Use `BatchedMesh` for rendering large numbers of objects with the same material but different geometries — provides multi-draw batch rendering to reduce draw calls [source](./.skilld/docs/pages/BatchedMesh.html.md:L1-5)
+- Employ Clock.getDelta() in your render loop to obtain consistent frame-independent delta time for animations and physics — this ensures smooth behaviour across varying frame rates [source](./.skilld/docs/pages/AnimationMixer.html.md#update)
 
-- Reserve buffer space when adding geometries to `BatchedMesh` if planning to replace with larger geometries later via the `reservedVertexCount` and `reservedIndexCount` parameters [source](./.skilld/docs/pages/BatchedMesh.html.md:L110-130)
+- Create one AnimationMixer per animated object to enable independent animation playback and control — calling clipAction() on the same mixer for different objects ensures action reuse and memory efficiency [source](./.skilld/docs/pages/AnimationMixer.html.md#constructor)
 
-- Set `needsUpdate = true` on materials after modifying properties to trigger shader recompilation and reflect changes in the next render [source](./.skilld/docs/pages/Material.html.md:L175-179)
+- Use InstancedMesh when rendering many objects with identical geometry and material but different world transformations — this drastically reduces draw calls and improves performance [source](./.skilld/docs/pages/InstancedMesh.html.md)
 
-- Disable depth writing for 2D overlays by setting `depthWrite = false` to layer elements without z-index artifacts [source](./.skilld/docs/pages/Material.html.md:L139-145)
+- Leverage indexed geometry (BufferGeometry with an index attribute) to reuse vertices across multiple triangles — this reduces GPU memory overhead and improves performance [source](./.skilld/docs/pages/BufferGeometry.html.md#index)
 
-- Use `depthTexture` instead of `depthBuffer` on render targets for post-processing to access depth data in shaders [source](./.skilld/docs/pages/RenderTarget.html.md:L43-47)
+- Set Material.side to DoubleSide when raycasting against surfaces where both front and back faces may be intersected — by default only front-facing faces are detected [source](./.skilld/docs/pages/Raycaster.html.md#intersectobject)
 
-- Enable MSAA on render targets by setting `samples` to a value > 0 (typically 4 or 8) for smoother output, but balance against performance cost [source](./.skilld/docs/pages/RenderTarget.html.md:L79-85)
+- Share a single LoadingManager across related loaders to unify progress tracking and load completion events — this is essential when loading interdependent assets like models and textures [source](./.skilld/docs/pages/LoadingManager.html.md#code-example)
 
-- Disable `generateMipmaps` and set it to `false` if creating mipmaps manually to avoid redundant automatic generation [source](./.skilld/docs/pages/Texture.html.md:L119-125)
+- Use UniformsUtils.merge() when combining custom shader uniforms with built-in fog or lighting uniforms — this ensures proper merging and avoids uniform name collisions [source](./.skilld/docs/pages/ShaderMaterial.html.md#fog)
 
-- Dispose and recreate textures to change dimensions, format, or type — modifying these properties directly after first use has no effect [source](./.skilld/docs/pages/Texture.html.md:L1-7)
+- Disable Object3D.matrixAutoUpdate on static geometry to skip redundant matrix recalculations every frame — manually call updateMatrix() when the object's position, rotation, or scale changes [source](./.skilld/docs/pages/Object3D.html.md#matrixautoupdate)
 
-- Set `global = true` on nodes that should be declared only once (e.g., `AttributeNode`) in shader graph systems to leverage the internal caching system [source](./.skilld/docs/pages/Node.html.md:L20-25)
+- Monitor GPU memory and rendering performance via WebGLRenderer.info — track memory usage, draw call counts, and texture allocation to identify bottlenecks [source](./.skilld/docs/pages/WebGLRenderer.html.md#info)
 
-- Update `AnimationMixer` with delta time in the render loop via `mixer.update(deltaTime)` to advance animations smoothly [source](./.skilld/docs/pages/AnimationMixer.html.md:L119-129)
+- Always set the needsUpdate flag on InstancedMesh.instanceMatrix and InstancedMesh.instanceColor after batch updates — without this flag, changes are not propagated to the GPU [source](./.skilld/docs/pages/InstancedMesh.html.md#setmatrixat)
 
-- Call `AnimationMixer.uncacheAction()`, `uncacheClip()`, or `uncacheRoot()` to deallocate memory resources, but ensure related actions are stopped first [source](./.skilld/docs/pages/AnimationMixer.html.md:L91-116)
+- Assign appropriate colorSpace to textures based on their content — use SRGBColorSpace for colour data (diffuse, emissive maps) and NoColorSpace for non-colour data (normal, metalness, roughness maps) [source](./.skilld/docs/pages/MeshStandardMaterial.html.md#colorspace-details)
 
 <!-- /skilld:best-practices -->

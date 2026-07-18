@@ -2,14 +2,14 @@
 name: tailwindcss-skilld
 description: 'A utility-first CSS framework for rapidly building custom user interfaces. ALWAYS use when writing code importing "tailwindcss". Consult for debugging, best practices, or modifying tailwindcss.'
 metadata:
-  version: 4.3.1
+  version: 4.3.3
   generated_by: cached
-  generated_at: 2026-06-28
+  generated_at: 2026-07-18
 ---
 
-# tailwindlabs/tailwindcss `tailwindcss@4.3.1`
+# tailwindlabs/tailwindcss `tailwindcss@4.3.3`
 
-**Tags:** next: 4.0.0, v3-lts: 3.4.19, latest: 4.3.1
+**Tags:** next: 4.0.0, v3-lts: 3.4.19, insiders: 0.0.0-insiders.094bf62
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Issues](./.skilld/issues/_INDEX.md) • [Discussions](./.skilld/discussions/_INDEX.md) • [Releases](./.skilld/releases/_INDEX.md)
 
@@ -23,64 +23,69 @@ Use `skilld search "query" -p tailwindcss` instead of grepping `.skilld/` direct
 
 This section documents version-specific API changes — prioritize recent major/minor releases.
 
-- NEW: `@container-size` utility — added in v4.3.0 for container size queries [source](./.skilld/releases/v4.3.0.md#added)
+- BREAKING: `start-*` and `end-*` utilities — deprecated in v4.2.0 in favour of logical utilities `inset-s-*` and `inset-e-*`; existing code continues to work but canonicalization now migrates these to the new names [source](./.skilld/releases/v4.2.0.md#deprecated)
 
-- NEW: `scrollbar-*` utilities — `scrollbar-{auto,thin,none}` for `scrollbar-width`, `scrollbar-thumb-*` and `scrollbar-track-*` for `scrollbar-color` added in v4.3.0 [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `@container-size` utility — added in v4.3.0, creates container query size utilities for responsive component queries [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: `scrollbar-gutter-*` utilities — added in v4.3.0 for `scrollbar-gutter` CSS property [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `scrollbar-{auto,thin,none}` utilities — added in v4.3.0, controls `scrollbar-width` CSS property for scrollbar visibility and sizing (#20019) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: `zoom-*` utilities — added in v4.3.0 [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `scrollbar-thumb-*` and `scrollbar-track-*` color utilities — added in v4.3.0, style scrollbar thumb and track colours via `scrollbar-color` CSS property (#20019) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: `tab-*` utilities — added in v4.3.0 for `tab-size` CSS property [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `scrollbar-gutter-*` utilities — added in v4.3.0, controls `scrollbar-gutter` property to reserve space for scrollbars (#20018) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: Stacked `@variant` syntax — `@variant hover:focus { … }` now supported in v4.3.0, enabling composition of multiple variant states [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `zoom-*` utilities — added in v4.3.0, provides CSS `zoom` property values for element scaling (#20020) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: Compound `@variant` syntax — `@variant hover, focus { … }` now supported in v4.3.0, applying same rules to multiple selectors [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `tab-*` utilities — added in v4.3.0, supplies `tab-size` property values for controlling whitespace/tab rendering (#20022) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: `--default(…)` in functional utilities — functional `@utility` definitions can now use `--default(…)` in `--value(…)` and `--modifier(…)` expressions in v4.3.0 [source](./.skilld/releases/v4.3.0.md#added)
+- NEW: `@variant` with stacked variants — added in v4.3.0, allows defining custom variants using stacked syntax like `@variant hover:focus { … }` (#19996) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: `@tailwindcss/webpack` package — webpack plugin for Tailwind CSS added in v4.2.0 [source](./.skilld/releases/v4.2.0.md#added)
+- NEW: `@variant` with compound variants — added in v4.3.0, allows defining custom variants using compound syntax like `@variant hover, focus { … }` (#19996) [source](./.skilld/releases/v4.3.0.md#added)
 
-- NEW: Logical property utilities — v4.2.0 added `pbs-*`, `pbe-*`, `mbs-*`, `mbe-*`, `scroll-pbs-*`, `scroll-pbe-*`, `scroll-mbs-*`, `scroll-mbe-*`, `border-bs-*`, `border-be-*`, `inline-*`, `min-inline-*`, `max-inline-*`, `block-*`, `min-block-*`, `max-block-*`, `inset-s-*`, `inset-e-*`, `inset-bs-*`, `inset-be-*` for CSS logical properties [source](./.skilld/releases/v4.2.0.md#added)
+- NEW: `@tailwindcss/webpack` package — added in v4.2.0, integrates Tailwind CSS as a webpack plugin for bundler-native processing (#19610) [source](./.skilld/releases/v4.2.0.md#added)
 
-- DEPRECATED: `start-*` and `end-*` utilities — deprecated in v4.2.0, replaced by `inset-s-*` and `inset-e-*` utilities [source](./.skilld/releases/v4.2.0.md#deprecated)
+- NEW: Logical spacing utilities — added in v4.2.0, provides block-flow and inline-flow directions: `pbs-*`, `pbe-*`, `mbs-*`, `mbe-*`, `scroll-pbs-*`, `scroll-pbe-*`, `scroll-mbs-*`, `scroll-mbe-*`, `border-bs-*`, `border-be-*` (#19601) [source](./.skilld/releases/v4.2.0.md#added)
 
-- BREAKING: Spacing utility CSS generation — v4.3.1 changed spacing utilities to generate `0` instead of `calc(var(--spacing) * 0)` for zero values (e.g. `m-0`), and `var(--spacing)` instead of `calc(var(--spacing) * 1)` for single-unit values (e.g. `m-1`), affecting CSS output [source](./.skilld/releases/v4.3.1.md#changed)
+- NEW: Logical size utilities — added in v4.2.0, provides inline and block sizing: `inline-*`, `min-inline-*`, `max-inline-*`, `block-*`, `min-block-*`, `max-block-*` (#19612) [source](./.skilld/releases/v4.2.0.md#added)
 
-- NEW: `--silent` CLI option — `@tailwindcss/cli` gained `--silent` flag in v4.3.1 to suppress output [source](./.skilld/releases/v4.3.1.md#added)
+- NEW: Logical inset utilities — added in v4.2.0, provides logical inset positioning: `inset-s-*`, `inset-e-*`, `inset-bs-*`, `inset-be-*` as replacements for `start-*` and `end-*` (#19613) [source](./.skilld/releases/v4.2.0.md#added)
 
-- NEW: Color palettes — mauve, olive, mist, and taupe color palettes added to default theme in v4.2.0 [source](./.skilld/releases/v4.2.0.md#added)
+- NEW: `font-features-*` utility — added in v4.2.0, controls `font-feature-settings` CSS property for advanced typography (#19623) [source](./.skilld/releases/v4.2.0.md#added)
 
-**Also changed:** `font-features-*` utility v4.2.0 · `PluginWithConfig` type export v4.3.0 · `@apply` with CSS mixins v4.3.1 · `@variant` in `addBase` v4.3.1 · `@source` symlink handling v4.3.1 · `@source` re-inclusion rules v4.3.1
+- NEW: `PluginWithConfig` type export — added in v4.3.0, exported from `tailwindcss/plugin` to fix TypeScript errors when inferring plugin config types (#19707) [source](./.skilld/releases/v4.3.0.md#fixed)
 
+**Also changed:** `--default(…)` in functional `@utility` · mauve/olive/mist/taupe colour palettes · `@variant` inside `@custom-variant` fixed · arbitrary `:has()` variants canonicalized to `has-[…]` · canonicalization now collapsing multi-directional utilities like `px-[1.2rem] py-[1.2rem]` → `p-[1.2rem]`
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
 
+## Tailwind CSS v4.3.3 Best Practices
+
 ## Best Practices
 
-- Use type hints with arbitrary values when the prefix maps to multiple CSS properties — disambiguate `text-`, `font-`, and similar ambiguous prefixes by adding a data type like `text-(length:--my-var)` for font-size or `text-(color:--my-var)` for color [source](./.skilld/docs/adding-custom-styles.mdx#resolving-ambiguities)
+- Use `@theme` to define design tokens rather than `:root` CSS variables — `@theme` makes Tailwind generate corresponding utility classes, while `:root` variables don't map to utilities [source](./.skilld/docs/theme.mdx:L54-60)
 
-- Always use complete, statically detectable class names instead of dynamically building them — avoid string interpolation or template literals to construct class names, and instead map props to predefined static strings so Tailwind's content scanner finds all required classes [source](./.skilld/docs/detecting-classes-in-source-files.mdx#dynamic-class-names)
+- Define functional utilities with `@utility name-*` (with `-*`) when you need to accept values via `--value()` and `--modifier()` — static utilities without `-*` don't support dynamic values [source](./.skilld/discussions/discussion-20244.md:L33-63)
 
-- Use arbitrary values when design specifications require breaking out of the theme scale — `w-[123px]` is sometimes more practical than fitting values to the scale, particularly when matching exact pixel specifications or when introducing a custom theme token would add unnecessary complexity [source](./.skilld/repos/tailwindlabs/tailwindcss/discussions/discussion-20142.md)
+- Create static utilities with `@utility name` (without `-*`) for fixed values that don't need parameters — these are useful for binary switches like `content-auto` or `scrollbar-hidden` [source](./.skilld/docs/adding-custom-styles.mdx:L408-415)
 
-- Support theme, bare integer, and arbitrary values together in functional `@utility` definitions — use multiple `--value()` declarations in a single property to accept all three input types, optionally with different transformations for each [source](./.skilld/docs/adding-custom-styles.mdx#supporting-theme-bare-and-arbitrary-values-together)
+- Use `--spacing()` function to access the spacing scale in custom utilities, even when referencing theme values — this ensures bare integers like `p-4` resolve correctly [source](./.skilld/discussions/discussion-20218.md:L25-31)
 
-- Use `@reference` instead of `@import` in component scoped styles to access theme variables and custom utilities without duplicating CSS in the output [source](./.skilld/docs/functions-and-directives.mdx#reference-directive)
+- Support multiple value types in functional utilities by stacking multiple `--value()` declarations — Tailwind will resolve them left to right and omit declarations that fail [source](./.skilld/docs/adding-custom-styles.mdx:L531-580)
 
-- Explicitly scan external UI libraries with `@source` since `node_modules` is skipped by default — this ensures classes from third-party Tailwind-based libraries are discovered and CSS is generated [source](./.skilld/docs/detecting-classes-in-source-files.mdx#explicitly-registering-sources)
+- Add `--default()` to functional utilities to support usage without explicit values — allows utilities like `tab` to use a default while `tab-2` provides a custom value [source](./.skilld/docs/adding-custom-styles.mdx:L583-608)
 
-- Define component classes in `@layer components` rather than via plugins to ensure utilities can still override them — when `addComponents` adds to utilities layer instead of components, use `@layer components` in your main CSS file [source](./.skilld/repos/tailwindlabs/tailwindcss/issues/issue-15045.md)
+- Use logical properties for width, margin, padding, and inset (added in v4.2.0) instead of directional properties for better internationalisation support — e.g. `pbs-*` for `padding-block-start` instead of `pt-*` [source](./.skilld/releases/v4.2.0.md:L13-21)
 
-- Stack and combine variants using `@variant` with stacked syntax (`hover:focus`) and comma-separated compound variants — Tailwind v4.3.0+ supports these patterns for more expressive custom styling [source](./.skilld/repos/tailwindlabs/tailwindcss/releases/v4.3.0.md)
+- Define custom theme namespaces to group related values — utilities in `--color-*`, `--spacing-*`, `--text-*` namespaces automatically generate corresponding utility classes [source](./.skilld/docs/theme.mdx:L129-301)
 
-- Use `--default()` inside `--value()` for functional utilities that work with or without explicit values — enables utilities like `tab` (using default) and `tab-2` (using explicit value) from a single definition [source](./.skilld/docs/adding-custom-styles.mdx#default-values)
+- Use `@layer base`, `@layer components`, and `@layer utilities` to control CSS specificity cascade when adding custom styles — component classes can be overridden by utility classes when placed in the correct layer [source](./.skilld/docs/adding-custom-styles.mdx:L238-297)
 
-- Override the `dark` variant with `@custom-variant` to switch from `prefers-color-scheme` to class or data-attribute-based dark mode — supports both class-based (`dark` class) and data-attribute (`data-theme="dark"`) implementations [source](./.skilld/docs/dark-mode.mdx#toggling-dark-mode-manually)
+- Use `@custom-variant` to create reusable custom variants instead of inline arbitrary variants — custom variants can be applied consistently and combined with other variants [source](./.skilld/docs/adding-custom-styles.mdx:L672-709)
 
-- Use `--spacing(--value(…))` in custom utilities to accept spacing scale values by default while supporting arbitrary length and percentage values — this pattern enables utilities to work with both theme tokens and arbitrary values in a single declaration [source](./.skilld/repos/tailwindlabs/tailwindcss/discussions/discussion-20218.md)
+- Use `@variant` directive to apply Tailwind variants within custom CSS and component classes — supports both stacked variants like `@variant hover:focus { … }` and compound variants like `@variant hover, focus { … }` [source](./.skilld/docs/adding-custom-styles.mdx:L299-400)
 
-- Register the same `@utility` name multiple times with different value types to support theme values, bare integers, and arbitrary values independently — v4.3.0+ allows this without conflicts, letting you handle each input type separately if needed [source](./.skilld/repos/tailwindlabs/tailwindcss/releases/v4.3.0.md)
+- Prefer canonical utility classes over arbitrary values when the value exists in your theme — arbitrary values like `w-[123px]` should be reserved for design specifications that don't map cleanly to your scale [source](./.skilld/discussions/discussion-20142.md:L26-34)
+
+- Use type hints with arbitrary values when resolving CSS variables ambiguously — e.g. `text-(length:--my-var)` vs `text-(color:--my-var)` to clarify whether a value is a length or color [source](./.skilld/docs/adding-custom-styles.mdx:L197-207)
 
 <!-- /skilld:best-practices -->

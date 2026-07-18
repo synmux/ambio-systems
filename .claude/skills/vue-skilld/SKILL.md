@@ -1,15 +1,15 @@
 ---
 name: vue-skilld
-description: 'ALWAYS use when editing or working with *.vue files or code importing "vue". Consult for debugging, best practices, or modifying vue, core.'
+description: 'The progressive JavaScript framework for building modern web UI. ALWAYS use when editing or working with *.vue files or code importing "vue". Consult for debugging, best practices, or modifying vue, core.'
 metadata:
-  version: 3.5.39
-  generated_by: Anthropic · Haiku 4.5
-  generated_at: 2026-06-29
+  version: 3.5.40
+  generated_by: cached
+  generated_at: 2026-07-18
 ---
 
-# vuejs/core `vue@3.5.39`
+# vuejs/core `vue@3.5.40`
 
-**Tags:** csp: 1.0.28-csp, legacy: 2.7.16, v2-latest: 2.7.16
+**Tags:** csp: 1.0.28-csp, v2-latest: 2.7.16, legacy: 2.7.16
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md) • [Issues](./.skilld/issues/_INDEX.md) • [Discussions](./.skilld/discussions/_INDEX.md) • [Releases](./.skilld/releases/_INDEX.md)
 
@@ -19,88 +19,89 @@ Use `skilld search "query" -p vue` instead of grepping `.skilld/` directories. R
 
 <!-- skilld:api-changes -->
 
-## API Changes — Vue 3.5.39
-
-This section documents version-specific API changes — prioritize recent major/minor releases.
-
 ## API Changes
 
-NEW: `useTemplateRef()` — new in v3.5, provides a simpler way to access template refs compared to plain variable refs; matches refs by runtime string IDs rather than compile-time analysis, supporting dynamic ref bindings [source](./.skilld/docs/api/composition-api-helpers.md#usetemplateref)
+This section documents version-specific API changes in Vue 3.x — focus on recent minor/major releases where breaking changes and new APIs supersede older training data.
 
-NEW: `useId()` — new in v3.5, generates unique-per-application IDs stable across SSR; used for form elements and accessibility attributes without hydration mismatches [source](./.skilld/docs/api/composition-api-helpers.md#useid)
+### Breaking Changes — v3.4
 
-NEW: `onWatcherCleanup()` — new in v3.5, globally imported API for registering cleanup callbacks in watchers; call inside watch callbacks before potential side effects [source](./.skilld/docs/api/reactivity-core.md#onwatchercleanup)
+- BREAKING: Global JSX namespace removed in v3.4 — no longer registers `JSX` global. Use `jsxImportSource: 'vue'` in `tsconfig.json` or `/* @jsxImportSource vue */` per-file. Reference `vue/jsx` to restore pre-3.4 behaviour [source](./.skilld/releases/blog-3.4.md#global-jsx-namespace)
 
-NEW: `Teleport defer` prop — new in v3.5, allows teleporting to target elements rendered after the teleport in the template; passes `defer` to enable deferred target resolution [source](./.skilld/docs/api/built-in-components.md#teleport)
+- BREAKING: `@vnodeXXX` event listeners now a compiler error — use `@vue:XXX` format instead. Previously a deprecation warning [source](./.skilld/releases/blog-3.4.md#other-removed-features)
 
-NEW: Lazy hydration strategies — new in v3.5, async components can control hydration timing via `hydrate` option; `hydrateOnIdle()`, `hydrateOnVisible()`, `hydrateOnMediaQuery()`, `hydrateOnInteraction()` available from vue [source](./.skilld/docs/guide/components/async.md)
+- BREAKING: `v-is` directive removed — use `is` attribute with `vue:` prefix (e.g. `is="vue:ComponentName"`). Deprecated in 3.3, removed in 3.4 [source](./.skilld/releases/blog-3.4.md#other-removed-features)
 
-STABLE: `defineModel()` — experimental in v3.3, stabilized in v3.4; simplifies two-way binding by automatically registering prop and emitting updates, returns a ref that can be directly mutated [source](./.skilld/releases/blog-3.4.md#definemodel-is-now-stable)
+- BREAKING: `app.config.unwrapInjectedRef` removed in v3.4 — was deprecated and enabled by default in 3.3, now removed entirely. Ref unwrapping in injections is always on [source](./.skilld/releases/blog-3.4.md#other-removed-features)
 
-STABLE: Reactive Props Destructure — experimental in v3.3, stabilized in v3.5; destructured props from `defineProps` are now reactive by default; accessing destructured variables is compiled to access on `props` object [source](./.skilld/releases/blog-3.5.md#reactive-props-destructure)
+- DEPRECATED: Reactivity Transform removed — marked deprecated in 3.3, removed in 3.4. Users can use Vue Macros plugin as replacement [source](./.skilld/releases/blog-3.4.md#other-removed-features)
 
-NEW: `v-bind` same-name shorthand — new in v3.4, allows `:id :src :alt` instead of `:id="id" :src="src" :alt="alt"`; matches JavaScript more than native HTML attributes [source](./.skilld/releases/blog-3.4.md#v-bind-same-name-shorthand)
+### New APIs — v3.5
 
-BREAKING: Global `JSX` namespace removed — v3.4 no longer registers global JSX namespace by default to avoid collision with React; use `jsxImportSource: 'vue'` in tsconfig.json or `/* @jsxImportSource vue */` per-file, or reference `vue/jsx` to restore [source](./.skilld/releases/blog-3.4.md#global-jsx-namespace)
+- NEW: `useTemplateRef()` — new composable for obtaining template refs via runtime string ID (replaces static ref name binding). Supports dynamic ref IDs, unlike the previous `ref` attribute approach [source](./.skilld/releases/blog-3.5.md#usetemplateref)
 
-BREAKING: Reactivity Transform removed — v3.4 removed the experimental Reactivity Transform feature; users can migrate via Vue Macros plugin instead [source](./.skilld/releases/blog-3.4.md#other-removed-features)
+- NEW: `useId()` — generates unique stable IDs across server and client renders, eliminates hydration mismatches for form labels and accessibility attributes [source](./.skilld/releases/blog-3.5.md#useid)
 
-BREAKING: `app.config.unwrapInjectedRef` removed — v3.4 removed this config option; unwrapping injected refs is now always enabled (was deprecated in v3.3) [source](./.skilld/releases/blog-3.4.md#other-removed-features)
+- NEW: `onWatcherCleanup()` — registers cleanup callbacks within watcher scope, replaces manual return function pattern for aborting stale requests or cancelling side effects [source](./.skilld/releases/blog-3.5.md#onwatchercleanup)
 
-BREAKING: `@vnodeXXX` event listeners removed — v3.4 changed from deprecation warning to compiler error; use `@vue:XXX` listeners instead [source](./.skilld/releases/blog-3.4.md#other-removed-features)
+- NEW: `hydrateOnVisible()` — async component hydration strategy that defers hydration until component becomes visible (via Intersection Observer), reduces initial hydration work [source](./.skilld/releases/blog-3.5.md#lazy-hydration)
 
-BREAKING: `v-is` directive removed — v3.4 removed v-is; use the `is` attribute with `vue:` prefix (`is="vue:ComponentName"`) instead [source](./.skilld/releases/blog-3.4.md#other-removed-features)
+- NEW: `useHost()`, `useShadowRoot()` — composables for accessing host element and shadow root within custom elements (via `defineCustomElement`), replaces `this.$host` for composition API [source](./.skilld/releases/blog-3.5.md#custom-elements-improvements)
 
-NEW: `defineOptions()` — new in v3.3, allows declaring component options directly in `<script setup>` without requiring a separate `<script>` block [source](./.skilld/releases/blog-3.3.md#defineoptions)
+- NEW: `data-allow-mismatch` attribute — suppresses hydration mismatch warnings on elements where client/server values differ intentionally (e.g. dates). Optionally scoped to types: `text`, `children`, `class`, `style`, `attribute` [source](./.skilld/releases/blog-3.5.md#data-allow-mismatch)
 
-ENHANCED: `toRef()` — enhanced in v3.3, now supports normalizing values/getters/existing refs into refs; calling `toRef` with a getter is similar to computed but more efficient [source](./.skilld/releases/blog-3.3.md#better-getter-support-with-toref-and-tovalue)
+- NEW: `Teleport defer` prop — mounts Teleport component after current render cycle, allows teleporting to targets rendered later in the same frame [source](./.skilld/releases/blog-3.5.md#deferred-teleport)
 
-NEW: `toValue()` — new in v3.3, normalizes values/getters/refs into values; replaces `unref()` for composables that accept getters as reactive data sources [source](./.skilld/releases/blog-3.3.md#better-getter-support-with-toref-and-tovalue)
+### Stabilized APIs — v3.4
 
-NEW: `defineSlots()` — new in v3.3, macro for declaring expected slots and their respective slot props in `<script setup>` with TypeScript; provides type hints only, no runtime implications [source](./.skilld/releases/blog-3.3.md#typed-slots-with-defineslots)
+- STABLE: `defineModel` stabilized from experimental in v3.3 to stable in v3.4 — simplifies `v-model` implementation by combining prop declaration and event emission. Also improved support for modifiers [source](./.skilld/releases/blog-3.4.md#definemodel-is-now-stable)
 
-NEW: Imported and complex types support in macros — new in v3.3, `defineProps` and `defineEmits` can now use imported types and limited complex types (intersections, unions); conditional types not supported [source](./.skilld/releases/blog-3.3.md#imported-and-complex-types-support-in-macros)
+- STABLE: Reactive Props Destructure stabilized in v3.5 — destructured props from `defineProps` now reactive by default. Wrap in getter for use in `watch()` or composables [source](./.skilld/releases/blog-3.5.md#reactive-props-destructure)
 
-NEW: Generic components — new in v3.3, `<script setup>` now accepts `generic` attribute for generic type parameters; supports multiple parameters, constraints, and defaults [source](./.skilld/releases/blog-3.3.md#generic-components)
+### New APIs — v3.3 (Still Current)
 
-NEW: Ergonomic `defineEmits` type syntax — new in v3.3, can declare emits as object literal with event names as keys and argument tuples as values; call signature syntax still supported [source](./.skilld/releases/blog-3.3.md#more-ergonomic-defineemits)
+- NEW: `defineSlots` macro — declares expected slots and their prop types. Type-only, no runtime effect. Provides IDE hints and type checking for slot props [source](./.skilld/releases/blog-3.3.md#typed-slots-with-defineslots)
 
-PERFORMANCE: Reactivity system improvements — v3.5 refactored reactivity with -56% memory usage and no behavior changes; computed props and sync effects more efficient [source](./.skilld/releases/blog-3.5.md#reactivity-system-optimizations)
+- NEW: `defineOptions` macro — sets component options directly in `<script setup>` without separate `<script>` block (e.g. `defineOptions({ inheritAttrs: false })`) [source](./.skilld/releases/blog-3.3.md#defineoptions)
 
-**Also changed:** `useHost()` and `useShadowRoot()` for custom elements · `configureApp` option for custom elements · `shadowRoot: false` option to mount custom elements without Shadow DOM · Custom element `nonce` option · `data-allow-mismatch` attribute for hydration mismatches · Improved hydration mismatch error messages in v3.4 with error reference page
+- NEW: `toValue()` utility — normalizes values, refs, and getters into raw values. Opposite of `toRef()`. Use in composables to accept getter functions as reactive sources [source](./.skilld/releases/blog-3.3.md#better-getter-support-with-toref-and-tovalue)
 
+- ENHANCED: `toRef()` — now accepts values, getters, or existing refs and normalizes them into refs. Getter refs are more efficient than `computed` when performing simple property access [source](./.skilld/releases/blog-3.3.md#better-getter-support-with-toref-and-tovalue)
+
+- NEW: `jsxImportSource` support — use `jsxImportSource: 'vue'` in `tsconfig.json` to opt-in to per-file JSX namespace instead of global (for React coexistence). Becomes required in 3.4 [source](./.skilld/releases/blog-3.3.md#jsx-import-source-support)
+
+**Also changed:** Generic `<script setup>` type parameters via `generic="T"` attribute (v3.3) · Imported types in `defineProps` / `defineEmits` (v3.3) · More ergonomic `defineEmits` with object syntax (v3.3) · `v-bind` same-name shorthand `:id :src :alt` (v3.4) · Template parser rewritten for 2x speed (v3.4)
 <!-- /skilld:api-changes -->
 
 <!-- skilld:best-practices -->
 
 ## Best Practices
 
-- Use lazy loading for route components via Vue Router's built-in support — this automatically splits components into separate chunks, improving initial page load by deferring non-critical routes. Combine with async components for optimal code splitting [source](./.skilld/docs/guide/best-practices/performance.md#code-splitting)
+- Prefer `<script setup>` for component composition — Vue automatically exposes top-level variables to templates, reducing boilerplate and improving readability [source](./.skilld/docs/guide/essentials/reactivity-fundamentals.md#script-setup)
 
-- Prefer type-based prop declaration with generic arguments in TypeScript `<script setup>` over runtime declaration — this provides better type inference and enables IDE autocompletion while the compiler translates it to equivalent runtime options [source](./.skilld/docs/guide/typescript/composition-api.md#typing-component-props)
+- Stabilise props passed to child components to minimise unnecessary re-renders — only children whose props actually change will update, dramatically reducing update performance in large lists [source](./.skilld/docs/guide/best-practices/performance.md#props-stability)
 
-- Use `toValue()` when writing composables that accept ref or getter arguments instead of raw values — it normalises both ref and getter inputs and ensures proper dependency tracking when called inside `watchEffect()` [source](./.skilld/docs/guide/reusability/composables.md#input-arguments)
+- Return plain objects containing refs from composables, not reactive objects — enables destructuring whilst retaining reactivity, which is the idiomatic pattern [source](./.skilld/docs/guide/reusability/composables.md#return-values)
 
-- Return a plain object of refs from composables instead of a reactive object — this preserves reactivity through destructuring, whereas reactive objects lose the connection when destructured [source](./.skilld/docs/guide/reusability/composables.md#return-values)
+- Start composable function names with "use" by convention — communicates that a function encapsulates stateful logic and Composition API lifecycle rules apply [source](./.skilld/docs/guide/reusability/composables.md#naming)
 
-- Keep computed properties simple and single-focused rather than combining multiple calculations into one — simpler properties are easier to test, read, and adapt to changing requirements as each value can be independently named and reused [source](./.skilld/docs/style-guide/rules-strongly-recommended.md#simple-computed-properties)
+- Use `computed()` properties instead of methods for derived values that depend on reactive state — computed properties cache their results, avoiding unnecessary recalculation if dependencies haven't changed [source](./.skilld/docs/guide/essentials/computed.md#computed-caching-vs-methods)
 
-- Use `shallowRef()` and `shallowReactive()` for large immutable data structures (100k+ properties accessed per render) to avoid the overhead of deep reactivity proxies — mutations must replace the root value entirely rather than modifying nested properties [source](./.skilld/docs/guide/best-practices/performance.md#reduce-reactivity-overhead-for-large-immutable-structures)
+- Apply `v-memo` to expensive sub-trees or large v-for lists to skip updates conditionally — gives fine-grained control over re-rendering without restructuring components [source](./.skilld/docs/guide/best-practices/performance.md#v-memo)
 
-- Keep computed property values stable when possible — in Vue 3.4+, computed properties only trigger effects when their value actually changes, reducing unnecessary effect triggers; avoid creating new objects on each compute or manually compare old values before returning [source](./.skilld/docs/guide/best-practices/performance.md#computed-stability)
+- Accept refs or getter functions in composable arguments and normalise them with `toValue()` — allows composables to work seamlessly with static values, refs, and computed properties [source](./.skilld/docs/guide/reusability/composables.md#input-arguments)
 
-- Keep template expressions simple and move complex logic to computed properties or methods — this improves readability and allows expressions to be reused and tested independently [source](./.skilld/docs/style-guide/rules-strongly-recommended.md#simple-expressions-in-templates)
+- Clean up side effects in `onUnmounted()` lifecycle hooks — prevents memory leaks from accumulated event listeners, timers, or subscriptions as component instances are destroyed [source](./.skilld/docs/guide/reusability/composables.md#side-effects)
 
-- Use `v-once` for sub-trees that are bound to runtime data but never need to update — the entire sub-tree skips all future updates, improving performance for static content [source](./.skilld/docs/guide/best-practices/performance.md#v-once)
+- Never use non-trusted content as a component template — Vue templates compile to JavaScript; user-provided templates enable arbitrary code execution and cannot be safely sandboxed [source](./.skilld/docs/guide/best-practices/security.md#rule-no-1-never-use-non-trusted-templates)
 
-- Composables should only be called at the top level of `<script setup>` or inside the `setup()` hook (synchronously) — this is required for Vue to properly register lifecycle hooks and link watchers to the component instance to prevent memory leaks [source](./.skilld/docs/guide/reusability/composables.md#usage-restrictions)
+- Wrap dynamic components with `<KeepAlive :max="limit">` to preserve component state and cache size — sets an LRU cache limit preventing unbounded memory growth in systems that frequently switch between many component instances [source](./.skilld/docs/guide/built-ins/keep-alive.md#max-cached-instances)
 
-- Use watch with getter functions instead of trying to directly watch nested properties of reactive objects — you cannot pass a property directly to `watch()`, only refs, reactive objects, getter functions, or arrays of these [source](./.skilld/docs/guide/essentials/watchers.md#watch-source-types)
+- Only perform DOM-specific side effects in `onMounted()` when building SSR-enabled applications — server environments have no DOM; mounting hooks run exclusively in the browser, safely isolating side effects [source](./.skilld/docs/guide/reusability/composables.md#side-effects)
 
-- Use shallow watchers (default behaviour) and only enable deep watching when necessary — deep watchers have performance cost; prefer restructuring your data to avoid deep nesting when possible [source](./.skilld/docs/guide/essentials/watchers.md#deep-watchers)
+- Beware of deep watchers on large data structures — deep traversal can be expensive; only enable when genuinely necessary and document the performance trade-off [source](./.skilld/docs/guide/essentials/watchers.md#deep-watchers)
 
-- Never dynamically compile templates from user input or server-rendered untrusted content — Vue templates compile to JavaScript and malicious content can execute arbitrary code; always control template content directly in your code [source](./.skilld/docs/guide/best-practices/security.md#rule-no-1-never-use-non-trusted-templates)
+- Link form labels explicitly with `for` and `id` attributes rather than nesting inputs inside labels — provides better support for assistive technology and clearer semantic HTML [source](./.skilld/docs/guide/best-practices/accessibility.md#labels)
 
-- Use `v-memo` to conditionally skip updates for expensive sub-trees or lists when dependencies haven't changed — this is particularly useful for large `v-for` lists or complex render trees to prevent unnecessary recalculations [source](./.skilld/docs/guide/best-practices/performance.md#v-memo)
+- Virtualise rendering for large lists to display only visible items and nearby rows — renders hundreds of DOM nodes instead of thousands, preserving performance even with 100,000+ list items [source](./.skilld/docs/guide/best-practices/performance.md#virtualize-large-lists)
 
 <!-- /skilld:best-practices -->
