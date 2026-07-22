@@ -60,11 +60,8 @@
   },
   "trustedDependencies": [
     "@anthropic-ai/claude-code",
-    "@google/genai",
     "@parcel/watcher",
     "esbuild",
-    "onnxruntime-node",
-    "protobufjs",
     "sharp",
     "unrs-resolver",
     "workerd"
