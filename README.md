@@ -11,32 +11,43 @@ A teaser landing page featuring an animated WebGL particle background, dark/ligh
 - **[DaisyUI v5](https://daisyui.com/)** – Component library for Tailwind
 - **[Three.js](https://threejs.org/)** – WebGL particle effects
 - **[Cloudflare D1](https://developers.cloudflare.com/d1/)** – SQLite database with Drizzle ORM
-- **[Bun](https://bun.sh/)** – JavaScript runtime & package manager
+- **[Node.js](https://nodejs.org/)** – Local JavaScript runtime (version pinned in `mise.toml`)
+- **[pnpm](https://pnpm.io/)** – Package manager (version pinned in `package.json`)
 
 ## Quick Start
 
+Install Node.js using the version in `mise.toml` and pnpm using the `packageManager` version in `package.json`.
+
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
-# Start development server
-bun run dev
+# Build and start the local Cloudflare development server
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+Open the URL printed by Wrangler (normally [http://localhost:8787](http://localhost:8787)) to view the site. `pnpm run dev` builds the application before starting Wrangler; rerun it after source changes to rebuild.
+
+Use pnpm for dependency changes and commit updates to `pnpm-lock.yaml`. Dependency build permissions and installation settings are configured in `pnpm-workspace.yaml`.
+
+`pnpm install` also runs the post-install scripts to prepare Nuxt, generate Cloudflare types, and format the repository.
 
 ## Scripts
 
-| Command                     | Description                   |
-| --------------------------- | ----------------------------- |
-| `bun run dev`               | Start dev server with HMR     |
-| `bun run build`             | Build for production          |
-| `bun run preview`           | Preview production build      |
-| `bun run generate`          | Generate static site          |
-| `bun run db:generate`       | Generate DB migrations        |
-| `bun run db:migrate:local`  | Apply migrations to local D1  |
-| `bun run db:migrate:remote` | Apply migrations to remote D1 |
-| `bun run db:studio`         | Open Drizzle Studio           |
+| Command                      | Description                                  |
+| ---------------------------- | -------------------------------------------- |
+| `pnpm run dev`               | Build and start Wrangler locally             |
+| `pnpm run build`             | Build for production                         |
+| `pnpm run generate`          | Generate static site                         |
+| `pnpm run deploy`            | Build and deploy to Cloudflare               |
+| `pnpm run cf-typegen`        | Generate Cloudflare Worker types             |
+| `pnpm run format`            | Format code using Prettier and Trunk         |
+| `pnpm run lint`              | Run Trunk checks across all files            |
+| `pnpm run lint:types`        | Run TypeScript checks without emitting files |
+| `pnpm run db:generate`       | Generate DB migrations                       |
+| `pnpm run db:migrate:local`  | Apply migrations to local D1                 |
+| `pnpm run db:migrate:remote` | Apply migrations to remote D1                |
+| `pnpm run db:studio`         | Open Drizzle Studio                          |
 
 ## Theming
 
@@ -52,8 +63,9 @@ Theme preference is persisted to localStorage and respects system preferences on
 This project uses [Trunk](https://trunk.io/) for linting and formatting:
 
 ```bash
-trunk check      # Run all linters
-trunk fmt        # Auto-format code
+pnpm run lint        # Run all linters
+pnpm run lint:types  # Check TypeScript types
+pnpm run format      # Auto-format code
 ```
 
 ## Project Structure

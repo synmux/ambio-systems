@@ -7,7 +7,8 @@ This document provides essential context for AI agents working in the Ambio Syst
 **Ambio Systems** is a Nuxt 4 application deployed to Cloudflare Workers/Pages. It uses Drizzle ORM with Cloudflare D1 (SQLite) and Cloudflare KV.
 
 - **Framework**: Nuxt 4 (Vue 3)
-- **Runtime**: Bun (Package Manager & Runtime)
+- **Local Runtime**: Node.js (version pinned in `mise.toml`)
+- **Package Manager**: pnpm (version pinned in `package.json`)
 - **Database**: Cloudflare D1 (SQLite)
 - **ORM**: Drizzle ORM
 - **Styling**: Tailwind CSS v4 + DaisyUI v5
@@ -16,25 +17,29 @@ This document provides essential context for AI agents working in the Ambio Syst
 
 ## Essential Commands
 
-Always use `bun` for scripts.
+Always use `pnpm` for scripts and dependency management. Use the Node.js version in `mise.toml` and the pnpm version in the `packageManager` field of `package.json`.
+
+Run `pnpm install` to install dependencies. Its post-install scripts prepare Nuxt, generate Cloudflare types, and format the repository.
 
 ### Development
 
-- `bun run dev` - Start development server (runs build + wrangler dev).
-- `bun run build` - Build the application for production.
-- `bun run format` - Format code using Prettier and Trunk.
-- `bun run cf-typegen` - Generate Cloudflare Worker types.
+- `pnpm run dev` - Build and start the local Wrangler development server (normally port 8787). Rerun after source changes to rebuild.
+- `pnpm run build` - Build the application for production.
+- `pnpm run format` - Format code using Prettier and Trunk.
+- `pnpm run lint` - Run Trunk checks across all files.
+- `pnpm run lint:types` - Run TypeScript checks without emitting files.
+- `pnpm run cf-typegen` - Generate Cloudflare Worker types.
 
 ### Database (Drizzle + D1)
 
-- `bun run db:generate` - Generate SQL migrations from schema changes.
-- `bun run db:migrate:local` - Apply migrations to local D1 database.
-- `bun run db:migrate:remote` - Apply migrations to production D1 database.
-- `bun run db:studio` - Open Drizzle Studio to inspect local database.
+- `pnpm run db:generate` - Generate SQL migrations from schema changes.
+- `pnpm run db:migrate:local` - Apply migrations to local D1 database.
+- `pnpm run db:migrate:remote` - Apply migrations to production D1 database.
+- `pnpm run db:studio` - Open Drizzle Studio to inspect local database.
 
 ### Deployment
 
-- `bun run deploy` - Build and deploy to Cloudflare.
+- `pnpm run deploy` - Build and deploy to Cloudflare.
 
 ## Code Structure
 
@@ -56,16 +61,18 @@ Always use `bun` for scripts.
 - **`nuxt.config.ts`**: Main Nuxt configuration (modules, CSS, Vite config).
 - **`wrangler.jsonc`**: Cloudflare configuration (D1, KV, variables).
 - **`drizzle.config.ts`**: Drizzle Kit configuration.
-- **`package.json`**: Dependencies and scripts.
-- **`mise.toml`**: Tool version management (currently active).
+- **`package.json`**: Dependencies, scripts, and pinned pnpm version.
+- **`pnpm-lock.yaml`**: Dependency lockfile; keep in sync with dependency changes.
+- **`pnpm-workspace.yaml`**: pnpm installation settings and dependency build permissions.
+- **`mise.toml`**: Node.js version management and local tasks.
 
 ## Patterns & Conventions
 
 ### Database
 
 - Define schemas in `server/database/schema.ts`.
-- Always run `bun run db:generate` after modifying the schema.
-- Use `db:migrate:local` to test changes locally.
+- Always run `pnpm run db:generate` after modifying the schema.
+- Use `pnpm run db:migrate:local` to test changes locally.
 
 ### Styling
 
@@ -81,7 +88,7 @@ Always use `bun` for scripts.
 
 ## Gotchas
 
-- **Bun**: This project uses Bun exclusively. Do not use `npm` or `yarn`.
+- **pnpm**: This project uses pnpm exclusively. Do not use `bun`, `npm`, or `yarn` for scripts or dependency management. Use `pnpm exec <command>` for local package binaries and `pnpm dlx <package>` for one-off tools.
 - **Cloudflare Bindings**: Local development relies on `wrangler` to mock D1 and KV bindings. Ensure `wrangler.jsonc` is up to date.
 - **Nuxt 4**: This is a Nuxt 4 project (beta/early access patterns may apply).
 
