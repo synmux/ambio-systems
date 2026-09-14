@@ -40,23 +40,31 @@
   "name": "ambio",
   "private": true,
   "scripts": {
-    "build": "bun run nuxt build",
-    "cf-typegen": "bun run wrangler types",
-    "db:generate": "bun run drizzle-kit generate",
-    "db:migrate:local": "bun run wrangler d1 migrations apply ambio-systems --local",
-    "db:migrate:remote": "bun run wrangler d1 migrations apply ambio-systems --remote",
-    "db:studio": "bun run drizzle-kit studio",
-    "deploy": "bun run run-s build deploy:wrangler",
-    "deploy:wrangler": "bun run wrangler deploy",
-    "dev": "bun run run-s build dev:wrangler",
-    "dev:wrangler": "bun run wrangler dev",
-    "format": "bun run run-s format:prettier format:trunk",
-    "format:prettier": "bun run prettier --write .",
-    "format:trunk": "bun run trunk fmt -a",
-    "generate": "bun run nuxt generate",
-    "postinstall": "bun run run-s prepare cf-typegen format",
-    "prepare": "bun run nuxt prepare && (skilld prepare || true)"
+    "build": "pnpm nuxt build",
+    "cf-typegen": "pnpm wrangler types",
+    "db:generate": "pnpm drizzle-kit generate",
+    "db:migrate:local": "pnpm wrangler d1 migrations apply ambio-systems --local",
+    "db:migrate:remote": "pnpm wrangler d1 migrations apply ambio-systems --remote",
+    "db:studio": "pnpm drizzle-kit studio",
+    "deploy": "pnpm run-s build deploy:wrangler",
+    "deploy:wrangler": "pnpm wrangler deploy",
+    "dev": "pnpm run-s build dev:wrangler",
+    "dev:wrangler": "pnpm wrangler dev",
+    "format": "pnpm run-s format:prettier format:trunk",
+    "format:prettier": "pnpm prettier --write .",
+    "format:trunk": "pnpm trunk fmt -a",
+    "generate": "pnpm nuxt generate",
+    "lint": "pnpm trunk check -a",
+    "lint:fix": "pnpm trunk check -a --fix",
+    "lint:types": "pnpm tsc --noEmit",
+    "postinstall": "pnpm run-s prepare cf-typegen format",
+    "prepare": "pnpm nuxt prepare && (skilld prepare || true)"
   },
   "type": "module",
-  "packageManager": "pnpm@12.4.1+sha512.2e81e399d73fe8390dab25e06aa788ab7a5908248d2f5a370f82b481147a6a7a367bf8048f9a6fdb6460f21a66f0542dedb8b94ca2c8723596741920b1656d4c"
+  "packageManager": "pnpm@12.4.1+sha512.2e81e399d73fe8390dab25e06aa788ab7a5908248d2f5a370f82b481147a6a7a367bf8048f9a6fdb6460f21a66f0542dedb8b94ca2c8723596741920b1656d4c",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synmux/ambio-systems.git"
+  },
+  "version": "0.0.0-dev.0"
 }
