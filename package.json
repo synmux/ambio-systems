@@ -33,7 +33,7 @@
     "nitropack": "^2.13.4",
     "node-gyp": "^13.1.0",
     "npm-run-all2": "^9.0.3",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "skilld": "^2.3.0",
     "wrangler": "^4.149.0"
   },
