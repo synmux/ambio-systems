@@ -34,7 +34,6 @@
     "node-gyp": "^13.1.0",
     "npm-run-all2": "^9.0.3",
     "prettier": "^3.9.10",
-    "skilld": "^3.6.8",
     "wrangler": "^4.151.2"
   },
   "name": "ambio",
@@ -58,7 +57,7 @@
     "lint:fix": "pnpm trunk check -a --fix",
     "lint:types": "pnpm tsc --noEmit",
     "postinstall": "pnpm run-s prepare cf-typegen format",
-    "prepare": "pnpm nuxt prepare && (skilld prepare || true)"
+    "prepare": "pnpm nuxt prepare"
   },
   "type": "module",
   "packageManager": "pnpm@12.4.1+sha512.2e81e399d73fe8390dab25e06aa788ab7a5908248d2f5a370f82b481147a6a7a367bf8048f9a6fdb6460f21a66f0542dedb8b94ca2c8723596741920b1656d4c",
